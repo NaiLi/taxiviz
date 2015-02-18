@@ -2,19 +2,67 @@ function map() {
 
 	console.log("in function map()");
 
+	// Global variables
 	var data;
+	var map;
 
 	d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
 		self.data = data;
 
-		var test = data[1];
-		var x = data[1]["x_coord"];
-		var y = data[1]["y_coord"];
+		run(data);
+
+	});
+
+	function run(data) {
+
+		// Creates the map
+		initializeMap();
 
 		draw(data);
 
-		//storeTaxiRoute(data, 11228);
-	});
+		createHeatMap(data);
+	}
+
+	function initializeMap() {
+
+		var c = new google.maps.LatLng(59.326142,17.9875455); //TODO: byt till sthlm
+
+		var mapOptions = {
+		  zoom: 11,
+		  center: c
+		}
+
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	}
+
+	function createHeatMap(data) {
+
+		// Create array with lat,long
+		var pointArray = [];
+
+		for(i=0; i<data.length; i++) {
+			
+			//console.log("data[i]: " + data[i][x_coord]);
+			//  new google.maps.LatLng(37.782551, -122.445368),
+			var temp = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
+			pointArray.push(temp);
+			
+		}
+
+
+		//var pointArray = new google.maps.MVCArray(data);
+
+		console.log("pointArray: " + pointArray);
+
+  		var heatmap = new google.maps.visualization.HeatmapLayer({
+    		data: pointArray
+  		});
+
+  		heatmap.setMap(map);
+	}
+
+
+
 
 	function draw(data) {
 		console.log("in function draw()");
@@ -31,13 +79,7 @@ function map() {
 	function addMarkers(taxis) {
 		console.log("in function addMarkers()");
 
-		var c = new google.maps.LatLng(59.326142,17.9875455); //TODO: byt till sthlm
-
-		var mapOptions = {
-		  zoom: 11,
-		  center: c
-		}
-		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		
 
 		for(i=0; i<taxis.length; i++) {
 
