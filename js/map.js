@@ -4,7 +4,7 @@ function map() {
 
 	var data;
 
-	d3.csv("data/taxi_sthlm_march_2013_small.dsv", function(error, data) {
+	d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
 		self.data = data;
 
 		var test = data[1];
@@ -17,39 +17,51 @@ function map() {
 
 		draw(data);
 
-		storeTaxiRoute(data, 11228);
+		//storeTaxiRoute(data, 11228);
 	});
 
 	function draw(data) {
 		console.log("in function draw()");
 
-		//addMarker(data);
-		google.maps.event.addDomListener(window, 'load', addMarker(data));
-
+		var taxiRoute = storeTaxiRoute(data, 10740);
+		console.log(taxiRoute)
+		google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
 
 	}
 
-	function addMarker(data) {
-		console.log("in function addMarker()");
+	function addMarkers(taxis) {
+		console.log("in function addMarkers()");
 
-		var myLatlng = new google.maps.LatLng(data[1]["y_coord"],data[1]["x_coord"]);
+		var c = new google.maps.LatLng(taxis[1]["y_coord"],taxis[1]["x_coord"]); //TODO: byt till sthlm
+
 		var mapOptions = {
 		  zoom: 11,
-		  center: myLatlng
+		  center: c
 		}
-
 		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-		var image = 'js/flower1.png';
+		for(i=0; i<taxis.length; i++) {
 
-		var marker = new google.maps.Marker({
-		    position: myLatlng,
-		    //map: map,
-		    title:"Taxi 2"
-		    //icon: image
-		});
+			var myLatlng = new google.maps.LatLng(taxis[i]["y_coord"],taxis[i]["x_coord"]);
 
-		marker.setMap(map);
+			var imgUrl = (taxis[i]["hired"] == "f") ? 'js/flower1.png' : 'js/seastar1.png';
+			var image = {
+			    url: imgUrl,
+
+			    origin: new google.maps.Point(0,0),
+			    anchor: new google.maps.Point(20, 22),
+			    scaledSize: new google.maps.Size(20, 20)
+			  };
+
+				var marker = new google.maps.Marker({
+				    position: myLatlng,
+				    //map: map,
+				    title:"Taxi 2",
+				    icon: image
+				});
+
+				marker.setMap(map);			
+		}
 	}
 
 	function storeTaxiRoute(data, id) {
