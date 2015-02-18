@@ -21,6 +21,33 @@ function map() {
 	function draw(data) {
 		console.log("in function draw()");
 
+		//addMarker(data);
+		google.maps.event.addDomListener(window, 'load', addMarker(data));
+
+
+	}
+
+	function addMarker(data) {
+		console.log("in function addMarker()");
+
+		var myLatlng = new google.maps.LatLng(data[1]["y_coord"],data[1]["x_coord"]);
+		var mapOptions = {
+		  zoom: 11,
+		  center: myLatlng
+		}
+
+		var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+		var image = 'js/flower1.png';
+
+		var marker = new google.maps.Marker({
+		    position: myLatlng,
+		    //map: map,
+		    title:"Taxi 2"
+		    //icon: image
+		});
+
+		marker.setMap(map);
 	}
 }
 
