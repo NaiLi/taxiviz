@@ -16,6 +16,8 @@ function map() {
 		console.log(y);
 
 		draw(data);
+
+		storeTaxiRoute(data, 11228);
 	});
 
 	function draw(data) {
@@ -48,6 +50,37 @@ function map() {
 		});
 
 		marker.setMap(map);
+	}
+
+	function storeTaxiRoute(data, id) {
+		console.log("in function storeTaxiRoute()");
+
+		var route = [];
+
+		for(i=0; i<data.length; i++) {
+
+			if(data[i]["id"] == id) {
+				
+				route.push(data[i]);
+			}
+		}
+
+		return route; 
+	}
+
+	function allFreeTaxis(data) {
+		console.log("in function allFreeTaxis()");
+
+		var freeTaxis = [];
+
+		for(i=0; i<data.length; i++) {
+
+			if(data[i]["hired"] == "f") {
+				freeTaxis.push(data[i]);
+			}
+		}
+
+		return freeTaxis;
 	}
 }
 
