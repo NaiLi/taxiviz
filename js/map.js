@@ -11,10 +11,6 @@ function map() {
 		var x = data[1]["x_coord"];
 		var y = data[1]["y_coord"];
 
-		console.log(test);
-		console.log(x);
-		console.log(y);
-
 		draw(data);
 
 		//storeTaxiRoute(data, 11228);
@@ -23,8 +19,11 @@ function map() {
 	function draw(data) {
 		console.log("in function draw()");
 
-		var taxiRoute = storeTaxiRoute(data, 10740);
-		console.log(taxiRoute)
+		var taxiRoute = storeTaxiRoute(data, 11266);
+		console.log(taxiRoute);
+		taxiRoute = sortByDate(taxiRoute);
+		console.log(taxiRoute);
+		var freeTaxis = allFreeOrHiredTaxis(data, "t");
 		google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
 
 	}
@@ -32,7 +31,7 @@ function map() {
 	function addMarkers(taxis) {
 		console.log("in function addMarkers()");
 
-		var c = new google.maps.LatLng(taxis[1]["y_coord"],taxis[1]["x_coord"]); //TODO: byt till sthlm
+		var c = new google.maps.LatLng(59.326142,17.9875455); //TODO: byt till sthlm
 
 		var mapOptions = {
 		  zoom: 11,
@@ -49,7 +48,7 @@ function map() {
 			    url: imgUrl,
 
 			    origin: new google.maps.Point(0,0),
-			    anchor: new google.maps.Point(20, 22),
+			    anchor: new google.maps.Point(10, 10),
 			    scaledSize: new google.maps.Size(20, 20)
 			  };
 
@@ -80,19 +79,28 @@ function map() {
 		return route; 
 	}
 
-	function allFreeTaxis(data) {
+	function allFreeOrHiredTaxis(data, wanted) {
 		console.log("in function allFreeTaxis()");
 
 		var freeTaxis = [];
 
 		for(i=0; i<data.length; i++) {
 
-			if(data[i]["hired"] == "f") {
+			if(data[i]["hired"] == wanted) {
 				freeTaxis.push(data[i]);
 			}
 		}
 
 		return freeTaxis;
+	}
+
+	function sortByDate(array) {
+
+		array.sort(function(a,b) {
+			return a["date"] > b["date"];
+		})
+
+		return array;
 	}
 }
 
