@@ -38,19 +38,19 @@ function map() {
 	function createHeatMap(data) {
 
 		// Create array with lat,long
-		var pointArray = [];
+		var temp = [];
 
 		for(i=0; i<data.length; i++) {
 			
 			//console.log("data[i]: " + data[i][x_coord]);
 			//  new google.maps.LatLng(37.782551, -122.445368),
-			var temp = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
-			pointArray.push(temp);
+			var t = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
+			temp.push(t);
 			
 		}
 
 
-		//var pointArray = new google.maps.MVCArray(data);
+		var pointArray = new google.maps.MVCArray(temp);
 
 		console.log("pointArray: " + pointArray);
 
