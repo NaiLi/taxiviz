@@ -6,7 +6,7 @@ function map() {
 	var data;
 	var map;
 
-	d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
+	d3.csv("data/new.csv", function(error, data) {
 		self.data = data;
 
 		run(data);
