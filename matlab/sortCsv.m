@@ -23,6 +23,14 @@ allTaxisAscendingTime = sortrows(T,2);
 %fromFourthOfMars = allTaxisAscendingTime(1128106:13272752,:);
 weekOne = allTaxisAscendingTime(1128106:4294860,:);
 
+%% Sort on cars
+carsSorted = sortrows(weekOne,1);
+
+%% Take half the sorted cars
+halfCarsSorted = carsSorted(1:1625403,:);
+
+
 %% Write to new csv file
-writetable(weekOne, 'weekOne.csv');
+%writetable(weekOne, 'weekOne.csv');
+writetable(halfCarsSorted, 'halfCarsSorted.csv');
 
