@@ -5,10 +5,17 @@ function map() {
 	// Global variables
 	var data;
 	var map;
+	var tickCounter;
+	var part;
+	var prevHeatmap;
+	var currHeatmap;
 
-	d3.csv("data/new.csv", function(error, data) {
+	d3.csv("data/halfCarsSorted.csv", function(error, data) {
+	//d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
 		self.data = data;
-
+		self.tickCounter = 0;
+		self.part = 7*24;
+		console.log(self.tickCounter)
 		run(data);
 
 	});
@@ -16,6 +23,7 @@ function map() {
 	function run(data) {
 
 		// Creates the map
+		console.log(self.tickCounter)
 		initializeMap();
 
 		draw(data);
@@ -25,7 +33,7 @@ function map() {
 
 	function initializeMap() {
 
-		var c = new google.maps.LatLng(59.326142,17.9875455); //TODO: byt till sthlm
+		var c = new google.maps.LatLng(59.326142,17.9875455);
 
 		var mapOptions = {
 		  zoom: 11,
@@ -37,9 +45,12 @@ function map() {
 
 	function createHeatMap(data) {
 
+
 		// Create array with lat,long
+		/*
 		var temp = [];
 
+		console.log(data.length)
 		for(i=0; i<data.length; i++) {
 			
 			//console.log("data[i]: " + data[i][x_coord]);
@@ -47,37 +58,39 @@ function map() {
 			var t = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
 			temp.push(t);
 			
-		}
-
+		}*/
+		var temp = data;
 
 		var pointArray = new google.maps.MVCArray(temp);
 
-		console.log("pointArray: " + pointArray);
+		//console.log("pointArray.length: " + pointArray.length);
 
   		var heatmap = new google.maps.visualization.HeatmapLayer({
     		data: pointArray
   		});
 
   		heatmap.setMap(map);
+
+  		return heatmap;
 	}
 
 
 
 
 	function draw(data) {
-		console.log("in function draw()");
+		//console.log("in function draw()");
 
 		var taxiRoute = storeTaxiRoute(data, 11266);
-		console.log(taxiRoute);
+		//console.log(taxiRoute);
 		taxiRoute = sortByDate(taxiRoute);
-		console.log(taxiRoute);
+		//console.log(taxiRoute);
 		var freeTaxis = allFreeOrHiredTaxis(data, "t");
 		google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
 
 	}
 
 	function addMarkers(taxis) {
-		console.log("in function addMarkers()");
+		//console.log("in function addMarkers()");
 
 		
 
@@ -85,7 +98,7 @@ function map() {
 
 			var myLatlng = new google.maps.LatLng(taxis[i]["y_coord"],taxis[i]["x_coord"]);
 
-			var imgUrl = (taxis[i]["hired"] == "f") ? 'js/flower1.png' : 'js/seastar1.png';
+			var imgUrl = (taxis[i]["hired"] == "t") ? 'js/flower1.png' : 'js/seastar1.png';
 			var image = {
 			    url: imgUrl,
 
@@ -106,7 +119,7 @@ function map() {
 	}
 
 	function storeTaxiRoute(data, id) {
-		console.log("in function storeTaxiRoute()");
+		//console.log("in function storeTaxiRoute()");
 
 		var route = [];
 
@@ -122,7 +135,7 @@ function map() {
 	}
 
 	function allFreeOrHiredTaxis(data, wanted) {
-		console.log("in function allFreeTaxis()");
+		//console.log("in function allFreeTaxis()");
 
 		var freeTaxis = [];
 
@@ -143,6 +156,44 @@ function map() {
 		})
 
 		return array;
+	}
+
+	
+
+	this.tickMap = function tickMap() {
+
+		this.timer = setInterval(function() {
+
+			//create temp array that is subarray of data set
+			var temp = [];
+
+			var countFrom = Math.floor(self.tickCounter*(self.data.length/(self.part)));
+			self.tickCounter++;
+            var countTo = Math.floor(self.tickCounter*self.data.length/(self.part));
+
+            if(countTo > self.data.length && countFrom < self.data.length) {
+            	countTo = self.data.length;
+            } else if(countFrom > self.data.length) {
+            	clearInterval(this.timer);
+            }
+            console.log(countFrom)
+			for(i=countFrom; i<countTo; ++i) {
+				var t = new google.maps.LatLng(self.data[i]["y_coord"], self.data[i]["x_coord"]);
+				temp.push(t);
+			}
+
+			//create heatmap
+			if(self.currHeatmap != null) {
+				self.prevHeatmap = self.currHeatmap;
+				self.currHeatmap = createHeatMap(temp);
+				self.prevHeatmap.setMap(null);
+			} else {
+				self.currHeatmap = createHeatMap(temp);
+			}
+
+
+        }
+        , 100);
 	}
 }
 
