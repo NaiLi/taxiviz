@@ -1,0 +1,9 @@
+#circleChart path {
+  stroke: #fff;
+}
+
+.hired path {
+    fill: none;
+    stroke-opacity: .7;
+    stroke-width: 3px !important;
+}
