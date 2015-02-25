@@ -15,7 +15,6 @@ function map() {
 		self.data = data;
 		self.tickCounter = 0;
 		self.part = 7*24;
-		console.log(self.tickCounter)
 		run(data);
 
 	});
@@ -23,21 +22,20 @@ function map() {
 	function run(data) {
 
 		// Creates the map
-		console.log(self.tickCounter)
 		initializeMap();
 
 		draw(data);
 
-		createHeatMap(data);
+		createHeatMap(createLocArray(0,10000)); //initially shown cars
 	}
 
 	function initializeMap() {
 
-		var c = new google.maps.LatLng(59.326142,17.9875455);
+		var stockholm = new google.maps.LatLng(59.326142,17.9875455);
 
 		var mapOptions = {
 		  zoom: 11,
-		  center: c
+		  center: stockholm
 		}
 
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -158,6 +156,16 @@ function map() {
 		return array;
 	}
 
+	function createLocArray(from, to) {
+
+		var temp = [];
+ 
+		for(i=from; i<to; ++i) {
+			var t = new google.maps.LatLng(self.data[i]["y_coord"], self.data[i]["x_coord"]);
+			temp.push(t);
+		}
+		return temp;
+	}
 	
 
 	this.tickMap = function tickMap() {
@@ -165,7 +173,7 @@ function map() {
 		this.timer = setInterval(function() {
 
 			//create temp array that is subarray of data set
-			var temp = [];
+			//var temp = [];
 
 			var countFrom = Math.floor(self.tickCounter*(self.data.length/(self.part)));
 			self.tickCounter++;
@@ -176,11 +184,13 @@ function map() {
             } else if(countFrom > self.data.length) {
             	clearInterval(this.timer);
             }
-            console.log(countFrom)
+            //console.log(countFrom)
+            /*
 			for(i=countFrom; i<countTo; ++i) {
 				var t = new google.maps.LatLng(self.data[i]["y_coord"], self.data[i]["x_coord"]);
 				temp.push(t);
-			}
+			}*/
+			var temp = createLocArray(countFrom, countTo);
 
 			//create heatmap
 			if(self.currHeatmap != null) {
