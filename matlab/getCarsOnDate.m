@@ -4,18 +4,46 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
 
     counter=1;
     outputTable = [];
+  
+    temp = floor(height(inputTable)/2);
+    dist = temp;
     
-    while(counter < size(inputTable,1))
-        
-        if(inputTable.date(counter) >= dateFrom && inputTable.date(counter) <= dateTo)
-            
-            newRow = inputTable(counter,:);
-            outputTable = [outputTable; newRow];
-        
-        elseif(inputTable.date(counter) > dateTo)
-            break;
+    dateFrom
+    inputTable.date(temp)
+    
+    % Find first line
+    while(dateFrom ~= inputTable.date(temp))  
+        dist = floor(dist/2);
+
+        if(dateFrom < inputTable.date(temp))
+            temp = temp - dist;
+
+        elseif(dateFrom > inputTable.date(temp))
+            temp = temp + dist;
         end
-        counter = counter+1;
     end
+    while(dateFrom == inputTable.date(temp))
+        temp = temp - 1;
+    end 
+    first = temp + 1;
+    
+    % Find last line
+    while(dateFrom ~= inputTable.date(temp))  
+        dist = floor(dist/2);
+
+        if(dateFrom < inputTable.date(temp))
+            temp = temp - dist;
+
+        elseif(dateFrom > inputTable.date(temp))
+            temp = temp + dist;
+        end
+    end
+    while(dateFrom == inputTable.date(temp))
+        temp = temp + 1;
+    end
+    last = temp - 1;
+    
+    outputTable = inputTable(first:last,:);
+
 end
 

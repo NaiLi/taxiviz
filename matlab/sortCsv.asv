@@ -28,20 +28,13 @@ sortedByDateTime = sortrows(sortedByTime, 2);
 disp('sorted by date');
 
 %% SUBTALBE First week
-firstDateWeekOne = datetime('2013-03-05');
+firstDateWeekOne = datetime('2013-03-04');
 lastDateWeekOne = datetime('2013-03-10');
-disp('dates for week one created');
-
-% WARNING: HEAVY FUNCTION
-weekOne = getCarsOnDate(sortedByDateTime, firstDateWeekOne, lastDateWeekOne);
-disp('table for week one created');
+weekOne = getCarsOnDate(allTaxisAscendingSate, firstDateWeekOne, lastDateWeekOne);
 
 %% SUBTABLE Day one
 % Day one
 date = datetime('2013-03-01');
-disp('date for day one created');
-
-% WARNING: HEAVY FUNCTION
 dayOne = getCarsOnDate(sortedByDateTime, date, date);
 
 %% SORTING BY CARS
@@ -53,7 +46,7 @@ dayOneSortedByCars = sortroes(dayOne, 1);
 % Last of car 10279: 547284
 % 10033: 64808
 h = heiht(dayOneSortedByCars) 
-%halfCarsSorted = weekOneSortedByCars(1:40000,:);
+halfCarsSorted = weekOneSortedByCars(1:40000,:);
 
 %%
 scaledTable = reduceStillCars(halfCarsSorted);
