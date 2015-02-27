@@ -1,23 +1,24 @@
 function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
-%UNTITLED2 Summary of this function goes here
-%   Detailed explanation goes here
+% This functions return a subtable from inputTable with all data 
+% from all cars between the two dates dateFrom and dateTo.
 
-    counter=1;
+% inputTable needs to be sorted by date-time
+% dateFrom needs to be before dateTo
+
     outputTable = [];
   
     temp = floor(height(inputTable)/2);
     dist = temp;
     
-    dateFrom
-    inputTable.date(temp)
-    
-    % Find first line
+    % Find first line with dateFrom
     while(dateFrom ~= inputTable.date(temp))  
         dist = floor(dist/2);
-
+        
+        % If date is smaller than temp move upwards
         if(dateFrom < inputTable.date(temp))
             temp = temp - dist;
 
+        % If date is bigger than temp move downwards
         elseif(dateFrom > inputTable.date(temp))
             temp = temp + dist;
         end
@@ -27,13 +28,15 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
     end 
     first = temp + 1;
     
-    % Find last line
+    % Find last line with dateTo
     while(dateFrom ~= inputTable.date(temp))  
         dist = floor(dist/2);
-
+        
+        % If date is smaller than temp move upwards
         if(dateFrom < inputTable.date(temp))
             temp = temp - dist;
-
+        
+        % If date is bigger than temp move downwards
         elseif(dateFrom > inputTable.date(temp))
             temp = temp + dist;
         end
