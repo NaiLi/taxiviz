@@ -7,10 +7,9 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
 
     outputTable = [];
   
+    % Find first line with dateFrom
     temp = floor(height(inputTable)/2);
     dist = temp;
-    
-    % Find first line with dateFrom
     while(dateFrom ~= inputTable.date(temp))  
         dist = floor(dist/2);
         
@@ -23,12 +22,14 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
             temp = temp + dist;
         end
     end
-    while(dateFrom == inputTable.date(temp))
+    while(temp>0 && dateFrom == inputTable.date(temp))
         temp = temp - 1;
-    end 
+    end
     first = temp + 1;
     
     % Find last line with dateTo
+    temp = floor(height(inputTable)/2);
+    dist = temp;
     while(dateFrom ~= inputTable.date(temp))  
         dist = floor(dist/2);
         
@@ -41,7 +42,7 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
             temp = temp + dist;
         end
     end
-    while(dateFrom == inputTable.date(temp))
+    while(temp<height(inputTable) &&  dateFrom == inputTable.date(temp))
         temp = temp + 1;
     end
     last = temp - 1;

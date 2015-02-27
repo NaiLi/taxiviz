@@ -43,20 +43,23 @@ disp('date for day one created');
 
 % WARNING: HEAVY FUNCTION
 dayOne = getCarsOnDate(sortedByDateTime, date, date);
+disp('table for day one created');
+
 
 %% SORTING BY CARS
 weekOneSortedByCars = sortrows(weekOne,1);
-dayOneSortedByCars = sortroes(dayOne, 1);
+disp('weekOne sorted by cars');
+dayOneSortedByCars = sortrows(dayOne, 1);
+disp('dayOne sorted by cars');
 
 %% Take half the sorted cars
-% Last of car 10818: 1625403
-% Last of car 10279: 547284
-% 10033: 64808
-h = heiht(dayOneSortedByCars) 
-%halfCarsSorted = weekOneSortedByCars(1:40000,:);
+h = height(dayOneSortedByCars);
+halfCarsSorted = weekOneSortedByCars(1:floor(h/2),:);
+disp('halved table');
 
 %%
 scaledTable = reduceStillCars(halfCarsSorted);
+disp('cars standing still removed');
 
 
 %% Write to new csv file
@@ -64,4 +67,4 @@ scaledTable = reduceStillCars(halfCarsSorted);
 %writetable(halfCarsSorted, 'halfCarsSorted.csv');
 %writetable(scaledTable, 'scaledTable.csv');
 writetable(dayOne, 'dayOne.csv');
-
+disp('file created');

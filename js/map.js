@@ -10,7 +10,7 @@ function map() {
 	var prevHeatmap;
 	var currHeatmap;
 
-	d3.csv("data/halfCarsSorted.csv", function(error, data) {
+	d3.csv("data/weekOne.csv", function(error, data) {
 	//d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
 		self.data = data;
 		self.tickCounter = 0;
@@ -121,7 +121,7 @@ function map() {
 
 		var route = [];
 
-		for(i=0; i<data.length; i++) {
+		for(i=0; i<data.length ; i++) {
 
 			if(data[i]["id"] == id) {
 				
