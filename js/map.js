@@ -11,7 +11,7 @@ function map() {
 	var currHeatmap;
 
 	d3.csv("data/weekOne.csv", function(error, data) {
-	//d3.csv("data/taxi_sthlm_march_2013_5000.csv", function(error, data) {
+	//d3.csv("data/taxi.csv", function(error, data) {
 		self.data = data;
 		self.tickCounter = 0;
 		self.part = 7*24;
@@ -78,7 +78,7 @@ function map() {
 	function draw(data) {
 		//console.log("in function draw()");
 
-		var taxiRoute = storeTaxiRoute(data, 11266);
+		var taxiRoute = storeTaxiRoute(data, 10010);
 		//console.log(taxiRoute);
 		taxiRoute = sortByDate(taxiRoute);
 		//console.log(taxiRoute);
@@ -96,13 +96,13 @@ function map() {
 
 			var myLatlng = new google.maps.LatLng(taxis[i]["y_coord"],taxis[i]["x_coord"]);
 
-			var imgUrl = (taxis[i]["hired"] == "t") ? 'js/flower1.png' : 'js/seastar1.png';
+			var imgUrl = (taxis[i]["hired"] == "t") ? 'img/red.png' : 'img/green.png';
 			var image = {
 			    url: imgUrl,
 
 			    origin: new google.maps.Point(0,0),
 			    anchor: new google.maps.Point(10, 10),
-			    scaledSize: new google.maps.Size(20, 20)
+			    scaledSize: new google.maps.Size(10, 10)
 			  };
 
 				var marker = new google.maps.Marker({

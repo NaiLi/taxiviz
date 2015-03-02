@@ -36,7 +36,7 @@ for(var i=0; i<24; i++) {
   lineData.push({"x": x, "y": y});
   //test.push({"x": Math.cos(0/rad)*r, "y": Math.sin(0/rad)*r},);
 
-console.log(lineData[i]);
+//console.log(lineData[i]);
 }
 
 
@@ -61,7 +61,7 @@ console.log(lineData[i]);
 	var rScale = d3.scale.linear().range([0,(Math.min(height,width))/2]);
 
 
-  d3.csv("data/dayOne.csv", function(data) {
+  d3.csv("data/weekOne.csv", function(data) {
 
     self.data = data;
 
