@@ -31,24 +31,24 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
     % Find last line with dateTo
     temp = floor(height(inputTable)/2);
     dist = temp;
-    while(dateFrom ~= inputTable.date(temp))  
+    while(dateTo ~= inputTable.date(temp))  
         dist = floor(dist/2);
         
         % If date is smaller than temp move upwards
-        if(dateFrom < inputTable.date(temp))
+        if(dateTo < inputTable.date(temp))
             temp = temp - dist;
         
         % If date is bigger than temp move downwards
-        elseif(dateFrom > inputTable.date(temp))
+        elseif(dateTo > inputTable.date(temp))
             temp = temp + dist;
         end
     end
-    while(temp<height(inputTable) &&  dateFrom == inputTable.date(temp))
+    while(temp<height(inputTable) &&  dateTo == inputTable.date(temp))
         temp = temp + 1;
     end
     last = temp - 1;
     disp('second date found');
-    
+  
     outputTable = inputTable(first:last,:);
 
 end
