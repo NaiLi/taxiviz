@@ -7,11 +7,40 @@ function circleChart(){
 	var ccDiv = $("circleChart");
 	var hired;
 
+var rad = Math.PI*180;
+var r = 100;
+
+//for(var i=0; i<360; i=i+15) {
+//  console.log("grader: " + i + "  x: " + Math.cos(i/rad)*10 + " + x: " + Math.sin(i/rad)*10);
+//}
+
+//var lineData = [  {"x": Math.cos(0/rad)*r,   "y": Math.sin(0/rad)*r},
+//                  {"x": Math.cos(15/rad)*r,   "y": Math.sin(15/rad)*r},
+//                  {"x": Math.cos(30/rad)*r,   "y": Math.sin(30/rad)*r},
+//                  {"x": Math.cos(45/rad)*r,   "y": Math.sin(45/rad)*r},
+//                  {"x": Math.cos(60/rad)*r,   "y": Math.sin(60/rad)*r},
+//                  {"x": Math.cos(75/rad)*r,   "y": Math.sin(75/rad)*r},
+//                  {"x": Math.cos(90/rad)*r,   "y": Math.sin(90/rad)*r},
+//                  {"x": Math.cos(105/rad)*r,   "y": Math.sin(105/rad)*r}];
+
+var lineData = [];
+
+for(var i=0; i<24; i++) {
+  //console.log("test");
+  var rad = i*15;
+  var deg = (2*Math.PI)/24;
+
+  var x = Math.cos(i*deg)*r;
+  var y = Math.sin(i*deg)*r;
+
+  lineData.push({"x": x, "y": y});
+  //test.push({"x": Math.cos(0/rad)*r, "y": Math.sin(0/rad)*r},);
+
+console.log(lineData[i]);
+}
 
 
-var lineData = [ { "x": 1,   "y": 5},  { "x": 20,  "y": 20},
-                  { "x": 40,  "y": 10}, { "x": 60,  "y": 40},
-                  { "x": 80,  "y": 5},  { "x": 100, "y": 60}];
+
   var lineFunction = d3.svg.line()
                        .x(function(d) { return d.x; })
                        .y(function(d) { return d.y; })

@@ -26,6 +26,7 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
         temp = temp - 1;
     end
     first = temp + 1;
+    disp('first date found');
     
     % Find last line with dateTo
     temp = floor(height(inputTable)/2);
@@ -46,6 +47,7 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
         temp = temp + 1;
     end
     last = temp - 1;
+    disp('second date found');
     
     outputTable = inputTable(first:last,:);
 
