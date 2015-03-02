@@ -10,7 +10,7 @@ function map() {
 	var prevHeatmap;
 	var currHeatmap;
 
-	d3.csv("data/weekOne.csv", function(error, data) {
+	d3.csv("data/weekOne_sortedbyDateTime.csv", function(error, data) {
 	//d3.csv("data/taxi.csv", function(error, data) {
 		self.data = data;
 		self.tickCounter = 0;
