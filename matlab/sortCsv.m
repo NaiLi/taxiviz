@@ -38,20 +38,23 @@ reducedTable = reduceStillCars(sortedByTaxiID);
 disp('cars standing still removed');
 
 %% GET ALL MONDAYS
+reducedTable = sortedByDateTime;
 date_mon1 = datetime('2013-03-04');
 date_mon2 = datetime('2013-03-11');
 date_mon3 = datetime('2013-03-18');
 date_mon4 = datetime('2013-03-25');
 
-mon1 = getCarsOnDate(reducedTable, date_mon1, data_mon1);
-mon2 = getCarsOnDate(reducedTable, date_mon2, data_mon2);
-mon3 = getCarsOnDate(reducedTable, date_mon3, data_mon3);
-mon4 = getCarsOnDate(reducedTable, date_mon4, data_mon4);
+mon1 = getCarsOnDate(reducedTable, date_mon1, date_mon1);
+mon2 = getCarsOnDate(reducedTable, date_mon2, date_mon2);
+mon3 = getCarsOnDate(reducedTable, date_mon3, date_mon3);
+mon4 = getCarsOnDate(reducedTable, date_mon4, date_mon4);
 
 % merge
-%mondays = ;
-%mondays_sortedbyTime = sortrows(mondays, 3);
-%writetable(mondays_sortedbyTime, 'mondays_sortedbyTime.csv');
+mondays = [mon1; mon2];
+mondays = [mondays; mon3];
+mondays = [mondays; mon4];
+mondays_sortedbyTime = sortrows(mondays, 3);
+writetable(mondays_sortedbyTime, 'mondays_sortedbyTime.csv');
 
 %% GET ALL TUESDAYS
 date_tue1 = datetime('2013-03-05');
@@ -59,15 +62,17 @@ date_tue2 = datetime('2013-03-12');
 date_tue3 = datetime('2013-03-19');
 date_tue4 = datetime('2013-03-26');
 
-tue1 = getCarsOnDate(reducedTable, date_tue1, data_tue1);
-tue2 = getCarsOnDate(reducedTable, date_tue2, data_tue2);
-tue3 = getCarsOnDate(reducedTable, date_tue3, data_tue3);
-tue4 = getCarsOnDate(reducedTable, date_tue4, data_tue4);
+tue1 = getCarsOnDate(reducedTable, date_tue1, date_tue1);
+tue2 = getCarsOnDate(reducedTable, date_tue2, date_tue2);
+tue3 = getCarsOnDate(reducedTable, date_tue3, date_tue3);
+tue4 = getCarsOnDate(reducedTable, date_tue4, date_tue4);
 
 % merge
-%tuesdays = ;
-%tuesdays_sortedbyTime = sortrows(mondays, 3);
-%writetable(tuesdays_sortedbyTime, 'tuesdays_sortedbyTime.csv');
+tuesdays = [tue1; tue2];
+tuesdays = [tuesdays; tue3];
+tuesdays = [tuesdays; tue4];
+tuesdays_sortedbyTime = sortrows(mondays, 3);
+writetable(tuesdays_sortedbyTime, 'tuesdays_sortedbyTime.csv');
 
 %% GET ALL WEDNESDAYS
 date_wed1 = datetime('2013-03-06');
@@ -75,15 +80,17 @@ date_wed2 = datetime('2013-03-13');
 date_wed3 = datetime('2013-03-20');
 date_wed4 = datetime('2013-03-27');
 
-wed1 = getCarsOnDate(reducedTable, date_wed1, data_wed1);
-wed2 = getCarsOnDate(reducedTable, date_wed2, data_wed2);
-wed3 = getCarsOnDate(reducedTable, date_wed3, data_wed3);
-wed4 = getCarsOnDate(reducedTable, date_wed4, data_wed4);
+wed1 = getCarsOnDate(reducedTable, date_wed1, date_wed1);
+wed2 = getCarsOnDate(reducedTable, date_wed2, date_wed2);
+wed3 = getCarsOnDate(reducedTable, date_wed3, date_wed3);
+wed4 = getCarsOnDate(reducedTable, date_wed4, date_wed4);
 
 % merge
-%wednesdays = ;
-%wednesdays_sortedbyTime = sortrows(wednesdays, 3);
-%writetable(wednesdays_sortedbyTime, 'wednesdays_sortedbyTime.csv');
+wednesdays = [wed1; wed2];
+wednesdays = [wednesdays; wed3];
+wednesdays = [wednesdays; wed4];
+wednesdays_sortedbyTime = sortrows(wednesdays, 3);
+writetable(wednesdays_sortedbyTime, 'wednesdays_sortedbyTime.csv');
 
 %% GET ALL THURSDAYS
 date_thu1 = datetime('2013-03-07');
