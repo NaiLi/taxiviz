@@ -65,23 +65,69 @@ function circleChart(){
 	
 
 		var chartData = [	{	"Hired": true,
-												"data": {	"00": h00_t, "01": h01_t, "02": h02_t, "03": h03_t, "04": h04_t, "05": h05_t, "06": h06_t, "07": h07_t, "08": h08_t, "09": h09_t, "10": h10_t, "11": h11_t, 
-																	"12": h12_t, "13": h13_t, "14": h14_t, "15": h15_t, "16": h16_t, "17": h17_t, "18": h18_t, "19": h19_t, "20": h20_t, "21": h21_t, "22": h22_t, "23": h23_t 
+												"data": {	00: h00_t, 
+																	01: h01_t, 
+																	02: h02_t, 
+																	03: h03_t, 
+																	04: h04_t, 
+																	05: h05_t, 
+																	06: h06_t, 
+																	07: h07_t, 
+																	08: h08_t, 
+																	09: h09_t, 
+																	10: h10_t, 
+																	11: h11_t, 
+																	12: h12_t, 
+																	13: h13_t, 
+																	14: h14_t, 
+																	15: h15_t, 
+																	16: h16_t, 
+																	17: h17_t, 
+																	18: h18_t, 
+																	19: h19_t, 
+																	20: h20_t, 
+																	21: h21_t, 
+																	22: h22_t, 
+																	23: h23_t
 																}
 		  								},
 		  								{ "Hired": false,
-												"data": {	"00": h00_f, "01": h01_f, "02": h02_f, "03": h03_f, "04": h04_f, "05": h05_f, "06": h06_f, "07": h07_f, "08": h08_f, "09": h09_f, "10": h10_f, "11": h11_f, 
-																	"12": h12_f, "13": h13_f, "14": h14_f, "15": h15_f, "16": h16_f, "17": h17_f, "18": h18_f, "19": h19_f, "20": h20_f, "21": h21_f, "22": h22_f, "23": h23_f 
+												"data": {	00: h01_f, 
+																	02: h02_f, 
+																	03: h03_f, 
+																	04: h04_f, 
+																	05: h05_f, 
+																	06: h06_f, 
+																	07: h07_f, 
+																	08: h08_f, 
+																	09: h09_f, 
+																	10: h10_f, 
+																	11: h11_f, 
+																	12: h12_f, 
+																	13: h13_f, 
+																	14: h14_f, 
+																	15: h15_f, 
+																	16: h16_f, 
+																	17: h17_f, 
+																	18: h18_f, 
+																	19: h19_f, 
+																	20: h20_f, 
+																	21: h21_f, 
+																	22: h22_f, 
+																	23: h23_f,
+																	00: h00_f
 																}
 												}
 		]
 
 		var chart = radialBarChart()
 		.barHeight(250)
+		.reverseLayerOrder(false)
+		.capitalizeLabels(true)
+		.barColors(['#B66199', '#9392CB', '#76D9FA'])
 		.domain([0,100])
-		.barColors(['green', 'red'])
-		.tickValues([5,10,15])
-    .tickCircleValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
+		.tickValues([30,60,90])
+		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
 
 		d3.select('#circleChart')
@@ -92,106 +138,24 @@ function circleChart(){
 
 	function getNrOfFalse(data) {
 
+		var totalNrOfPosts = 0;
 		var nrOfFalse = 0;
 		for(var i=0; i<data.length; i++) {
 
+			var temp = 1.;
+			if(data[i]["weight"] != 1) {
+				temp = parseInt(data[i]["weight"].valueOf());
+			}
+
 			if(data[i]["hired"] == "f") {
 
-				nrOfFalse++;
+				nrOfFalse = nrOfFalse + temp;
 			}
+
+			totalNrOfPosts = totalNrOfPosts + temp;
 		}
 
-		output = (nrOfFalse/data.length)*100;
-
-		console.log("nrOfFalse: " + nrOfFalse);
-		console.log("output: " + output);
+		output = (nrOfFalse/totalNrOfPosts)*100;
 		return output;
 	}
-
-
-
-
-
-
-
-
-
-	for(var i=0; i<=24; i++) {
-		
-		//console.log("data[i].time: " + i);
-
-		var deg = (2*Math.PI)/24;
-		var r = 100;
-		var x = Math.cos(i*deg)*r + r;
-		var y = Math.sin(i*deg)*r + r;
-
-		lineData.push({"x": x, "y": y});
-	}
-
-  var lineFunction = d3.svg.line()
-                       .x(function(d) { return d.x; })
-                       .y(function(d) { return d.y; })
-                       .interpolate("cardinal");
-
-  var margin = [10, 10, 10, 10],
-    width = 600 - margin[1] - margin[3], //TODO 600 and 200 dynamically
-    height = 200 - margin[0] - margin[2];
-
-
-  var svg = d3.select("#circleChart").append("svg:svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("svg:g")
-    .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
-
-  // radius scale from 0 to half of min of width/height
-	var rScale = d3.scale.linear().range([0,(Math.min(height,width))/2]);
-
-
-  
-
-  function draw(){
-  	console.log("in function draw");
-
-    hired = svg.append("path")
-      //.attr("class", "hired")
-      //.selectAll("path")
-                  //
-      //.data(self.data)
-      //.enter().append("svg:path")
-      .attr("d", lineFunction(lineData))
-      .style("stroke", "blue")
-      .attr("stroke-width", 2)
-      .attr("fill", "none");
-
-
-
-  }
-
-  function path(d) {
-      
-      //return line(dimensions.map(function(p) { 
-        //  return [x(p), y[p](d[p])]; }));
-
-  }
-
-  function polarToCoord(angle, value) {
-
-  	//motst/hyp = sin(v)
-  	// motst = hyp*sin(v)
-  	// närl/hyp = cos(v)
-  	// närl = hyp*cos(v)
-  }
-
-
-
-
 }
-
-
-
-
-
-
-
-
