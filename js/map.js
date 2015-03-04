@@ -4,11 +4,9 @@ function map() {
 
 	console.log("in function map()");
 
-	var file = "data/reducedTable_sortedbyDateTime.csv";
 
 	// Global variables
-	//var file = "data/weekOne_sortedbyDateTime.csv";
-	var file = "data/taxi_sortedbyDateTime.csv";
+	var file = "data/reducedTable_sortedbyDateTime.csv";
 	var data;
 	var map;
 	var tickCounter;
@@ -32,7 +30,8 @@ function map() {
 		// Creates the map
 		initializeMap();
 
-		getOneDay(data, new Date("2013-03-04")); 
+		var day = getOneDay(data, new Date("2013-03-04")); 
+		var hour = self.getHourOf(day,17);
 
 		draw(data);
 
@@ -190,7 +189,8 @@ function map() {
         , 100);
 	}
 
-	function getOneDay(data, searchDate) {
+	//collects all sub data of one date. Not depending on sorting. 
+	this.getOneDay = function getOneDay(data, searchDate) {
 
 		var temp = [];
 
@@ -202,6 +202,25 @@ function map() {
 				temp.push(data[i]);
 			}
 		}
+		return temp;
+	}
+
+	//collects all sub data of one hour from data consisting of only one day
+	this.getHourOf = function getHourOf(dayData, hour) {
+
+		var temp = [];
+		var hourstr = (hour<10) ? "0"+hour : hour;
+		var str;
+
+		for(i=0; i<dayData.length; ++i) {
+
+			str = dayData[i]["time"].substring(0,2);
+			
+			if(str == hourstr) {
+				temp.push(dayData[i]);
+			}
+		}
+		return temp;
 	}
 }
 
