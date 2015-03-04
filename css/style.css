@@ -1,3 +1,12 @@
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+	vertical-align: top;
+}
+
 #circleChart path {
   stroke: #fff;
 }
@@ -6,4 +15,17 @@
     fill: none;
     stroke-opacity: .7;
     stroke-width: 3px !important;
+}
+
+.slider {
+	/*width: 20%;*/
+}
+
+#interaction {
+	/*height: 200px;*/
+}
+
+#map {
+	width: 50%;
+	height: 400px;
 }
