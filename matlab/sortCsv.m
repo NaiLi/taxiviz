@@ -38,6 +38,7 @@ reducedTable = reduceStillCars(sortedByTaxiID);
 disp('cars standing still removed');
 
 %% GET ALL MONDAYS
+reducedTable = sortedByDateTime;
 date_mon1 = datetime('2013-03-04');
 date_mon2 = datetime('2013-03-11');
 date_mon3 = datetime('2013-03-18');
@@ -54,6 +55,7 @@ disp('all mondays extracted');
 %mondays = ;
 %mondays_sortedbyTime = sortrows(mondays, 3);
 %writetable(mondays_sortedbyTime, 'mondays_sortedbyTime.csv');
+
 mondays = [mon1; mon2];
 mondays = [mondays; mon3];
 mondays = [mondays; mon4];
@@ -65,6 +67,7 @@ date_tue1 = datetime('2013-03-05');
 date_tue2 = datetime('2013-03-12');
 date_tue3 = datetime('2013-03-19');
 date_tue4 = datetime('2013-03-26');
+
 
 tue1 = getCarsOnDate(reducedTablesortedByDateTime, date_tue1, date_tue1);
 tue2 = getCarsOnDate(reducedTablesortedByDateTime, date_tue2, date_tue2);
@@ -83,11 +86,13 @@ disp('merge complete');
 writetable(tuesdays_sortedbyTime, 'tuesdays_sortedbyTime.csv');
 disp('file created');
 
+
 %% GET ALL WEDNESDAYS
 date_wed1 = datetime('2013-03-06');
 date_wed2 = datetime('2013-03-13');
 date_wed3 = datetime('2013-03-20');
 date_wed4 = datetime('2013-03-27');
+
 
 wed1 = getCarsOnDate(reducedTablesortedByDateTime, date_wed1, date_wed1);
 wed2 = getCarsOnDate(reducedTablesortedByDateTime, date_wed2, date_wed2);
@@ -98,13 +103,7 @@ wed4 = getCarsOnDate(reducedTablesortedByDateTime, date_wed4, date_wed4);
 %wednesdays = ;
 %wednesdays_sortedbyTime = sortrows(wednesdays, 3);
 %writetable(wednesdays_sortedbyTime, 'wednesdays_sortedbyTime.csv');
-wednesdays = [wed1; wed2];
-wednesdays = [wednesdays; wed3];
-wednesdays = [wednesdays; wed4];
-wednesdays_sortedbyTime = sortrows(wednesdays, 3);
-disp('merge complete');
-writetable(wednesdays_sortedbyTime, 'wednesdays_sortedbyTime.csv');
-disp('file created');
+
 
 %% GET ALL THURSDAYS
 date_thu1 = datetime('2013-03-07');
