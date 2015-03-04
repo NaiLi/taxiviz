@@ -277,5 +277,5 @@ disp('weekFour sorted by cars');
 %writetable(halfCarsSorted, 'halfCarsSorted.csv');
 %writetable(scaledTable, 'scaledTable.csv');
 %writetable(dayOne, 'dayOne.csv');
-writetable(sortedByDateTime, 'taxi_sortedbyDateTime.csv');
+writetable(reducedTablesortedByDateTime, 'reducedTable_sortedbyDateTime.csv');
 disp('file created');

@@ -71,6 +71,7 @@ function radialBarChart() {
       .attr('transform', function(d, i) {return svgRotate(i * 360 / numBars);});
 
     // Axis
+    /*
     var axisScale = d3.scale.linear().domain(domain).range([0, -barHeight]);
     var axis = d3.svg.axis().scale(axisScale).orient('right');
     if(tickValues)
@@ -78,6 +79,7 @@ function radialBarChart() {
     g.append('g')
       .classed('axis', true)
       .call(axis);
+    */
 
     // Outer circle
     g.append('circle')
