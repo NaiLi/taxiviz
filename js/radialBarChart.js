@@ -1,5 +1,28 @@
 function radialBarChart() {
 
+  // Creating array with labels
+  var hours = [];
+  var h1 = 14;
+  var h2 = 0;
+  for(var i=0; i<24; i++) {
+    
+    if(i<10) {
+      hours.push(h1<10 ? "0" + h1.toString() : h1.toString());
+      //t<10 ? "0"+ t : t
+      h1 = h1 +1;
+    }
+    else {
+      hours.push(h2<10 ? "0" + h2.toString() : h2.toString());
+      h2 = h2 + 1;
+    }
+  }
+
+  for(var i=0; i<hours.length; i++) {
+    console.log("hours[i]: " + hours[i]);
+  }
+
+  console.log("hours.length: " + hours.length);
+
   // Configurable variables
   var margin = {top: 20, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
@@ -71,7 +94,6 @@ function radialBarChart() {
       .attr('transform', function(d, i) {return svgRotate(i * 360 / numBars);});
 
     // Axis
-    /*
     var axisScale = d3.scale.linear().domain(domain).range([0, -barHeight]);
     var axis = d3.svg.axis().scale(axisScale).orient('right');
     if(tickValues)
@@ -79,7 +101,6 @@ function radialBarChart() {
     g.append('g')
       .classed('axis', true)
       .call(axis);
-    */
 
     // Outer circle
     g.append('circle')
@@ -104,8 +125,9 @@ function radialBarChart() {
       .style('fill', function(d, i) {return colorLabels ? barColors[i % barColors.length] : null;})
       .append('textPath')
       .attr('xlink:href', '#label-path')
-      .attr('startOffset', function(d, i) {return i * 100 / numBars + 50 / numBars + '%';})
-      .text(function(d) {return capitalizeLabels ? d.toUpperCase() : d;});
+      // changes where texts is anchored
+      .attr('startOffset', function(d, i) {return i * 100 / numBars + 10 / numBars + '%';})
+      .text(function(d) { return hours[d] ;});
   }
 
   function chart(selection) {

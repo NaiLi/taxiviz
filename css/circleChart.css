@@ -1,0 +1,52 @@
+#circleChart {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 14px;
+}
+#circleChart path {
+  fill: none;
+}
+
+/* layers */
+#circleChart .layer-0 path {
+  fill: steelblue;
+}
+#circleChart .layer-1 path {
+  fill: green !important;
+  opacity: 0.5;
+  stroke-width: 1px;
+  stroke: #333;
+}
+
+/* Outer circle, tick-circles and spokes */
+#circleChart circle.outer {
+  stroke: #aaa;
+  stroke-dasharray: 4, 4;  
+}
+#circleChart .tick-circles circle {
+  stroke: #ddd;
+  stroke-dasharray: 2, 2;  
+}
+#circleChart .spokes line {
+  stroke: #666;
+  stroke-width: 0.2;
+}
+
+/* Axis */
+#circleChart .axis text {
+  font-size: 11px;
+}
+#circleChart .axis path {
+  stroke: #999;
+  shape-rendering: crispEdges;
+}
+#circleChart .axis line {
+  stroke: #999;
+  shape-rendering: crispEdges;
+}
+
+/* Labels */
+#circleChart .labels text {
+  fill: #333;
+  font-size: 10px;
+  font-weight: 500;
+}

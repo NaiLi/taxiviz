@@ -30,7 +30,7 @@ function map() {
 		// Creates the map
 		initializeMap();
 
-		var day = getOneDay(data, new Date("2013-03-04")); 
+		var day = self.getOneDay(data, new Date("2013-03-04")); 
 		var hour = self.getHourOf(day,17);
 
 		draw(data);
