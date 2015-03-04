@@ -10,8 +10,6 @@ function interaction() {
         width = div.width();// - margin[1] - margin[3],
         height = div.height();// - margin[0] - margin[2];
 
-	//var height = 50;
-	//var width = 600;
 	var data;
 	var day;
 
@@ -21,12 +19,11 @@ function interaction() {
 
 	var weekAxis = d3.svg.axis()
 		.scale(weekScale)
-		.ticks(6)
+		.ticks(24)
 		.orient("bottom");
 
 
 	var svg = d3.select("#interaction").append("svg:svg")
-    //.attr("width", width)
     .attr("height", height)
     .append("svg:g");
 
@@ -42,35 +39,14 @@ function interaction() {
 	var slide = d3.select("#weekslide").on("input", function() {
 
 			var num = this.value;
-			//console.log(num)
-			//console.log(self.day.length)
-
 			var hourData = map.getHourOf(self.day, num);
 
 			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
-			draw();
 		
     	});
-
+/*
 	svg.call(weekAxis)
-		.attr("x", width);
-    /*
-  	d3.select("#weekslide").on("input", function() {
-
-  		var start = Math.floor((this.value - 1)*(self.data.length/7));
-  		var stop = Math.floor((this.value)*(self.data.length/7));
-  		console.log("start: " + start + "  stop:  " + stop);
-
-  		//if(this.value == 1) {
-			map.createHeatMapGlobal(createLocArray(self.data, start, stop));
-  		//}
-  		console.log(this.value);
-  	})*/
-
-    function draw() {
-    	//console.log(self.data.length);
-    	//map.createHeatMapGlobal(createLocArray(self.data, 0, self.data.length-1));
-    }
+		.attr("x", width);*/
 
 	function createLocArray(data, from, to) {
 
@@ -83,27 +59,6 @@ function interaction() {
 			}
 			temp.push(obj);
 		}
-		//console.log(temp)
 		return temp;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
