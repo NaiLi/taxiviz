@@ -25,7 +25,7 @@ function outputTable = reduceStillCars(inputTable)
             % euclidian distance 
             dist = pdist(X); %0.0112 = ca 1.245 km
 
-            if(dist < 0.008) %0.008 ca 0.89 km
+            if(dist < 0.002) %0.008 ca 0.89 km
                 newRow = inputTable(counter,:);
                 %weightCounter = weightCounter + 1;
                 newRow.weight = 2; % börjar med att bara para ihop 2
@@ -46,7 +46,10 @@ function outputTable = reduceStillCars(inputTable)
         end
         
         
-        
+        if(mod(counter,100) == 0)
+            str = ['Counter: ', num2str(counter)];
+                    disp(str);
+        end
         
     end
         

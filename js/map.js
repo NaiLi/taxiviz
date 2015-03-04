@@ -7,6 +7,8 @@ function map() {
 	var file = "data/reducedTable_sortedbyDateTime.csv";
 
 	// Global variables
+	//var file = "data/weekOne_sortedbyDateTime.csv";
+	var file = "data/taxi_sortedbyDateTime.csv";
 	var data;
 	var map;
 	var tickCounter;
