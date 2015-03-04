@@ -11,15 +11,21 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
     temp = floor(height(inputTable)/2);
     dist = temp;
     while(dateFrom ~= inputTable.date(temp))  
-        dist = floor(dist/2);
+        if(dist ~= 1)
+            dist = floor(dist/2);
+        end
         
         % If date is smaller than temp move upwards
         if(dateFrom < inputTable.date(temp))
             temp = temp - dist;
+            %X = ['first less: ' , datestr(inputTable.date(temp))];
+            %disp(X);
 
         % If date is bigger than temp move downwards
         elseif(dateFrom > inputTable.date(temp))
             temp = temp + dist;
+            %X = ['first greater: ' , datestr(inputTable.date(temp))];
+            %disp(X);
         end
     end
     while(temp>0 && dateFrom == inputTable.date(temp))
@@ -32,15 +38,21 @@ function outputTable = getCarsOnDate(inputTable, dateFrom, dateTo)
     temp = floor(height(inputTable)/2);
     dist = temp;
     while(dateTo ~= inputTable.date(temp))  
-        dist = floor(dist/2);
-        
+        if(dist ~= 1)
+            dist = floor(dist/2);
+        end
+            
         % If date is smaller than temp move upwards
         if(dateTo < inputTable.date(temp))
             temp = temp - dist;
+            %X = ['second less: ' , datestr(inputTable.date(temp))];
+            %disp(X);
         
         % If date is bigger than temp move downwards
         elseif(dateTo > inputTable.date(temp))
             temp = temp + dist;
+            %X = ['second greater: ' , datestr(inputTable.date(temp))];
+            %disp(X);
         end
     end
     while(temp<height(inputTable) &&  dateTo == inputTable.date(temp))

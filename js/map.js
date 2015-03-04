@@ -3,6 +3,8 @@ function map() {
 	console.log("in function map()");
 
 	// Global variables
+	//var file = "data/weekOne_sortedbyDateTime.csv";
+	var file = "data/taxi_sortedbyDateTime.csv";
 	var data;
 	var map;
 	var tickCounter;
@@ -10,7 +12,7 @@ function map() {
 	var prevHeatmap;
 	var currHeatmap;
 
-	d3.csv("data/weekOne_sortedbyDateTime.csv", function(error, data) {
+	d3.csv(file, function(error, data) {
 	//d3.csv("data/taxi.csv", function(error, data) {
 		self.data = data;
 		self.tickCounter = 0;

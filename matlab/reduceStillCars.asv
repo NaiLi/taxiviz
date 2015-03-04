@@ -46,10 +46,7 @@ function outputTable = reduceStillCars(inputTable)
         end
         
         
-        if(mod(counter,100) == 0)
-            str = ['Counter: ', num2str(counter)];
-                    disp(str);
-        end
+        if(counter
         
     end
         
