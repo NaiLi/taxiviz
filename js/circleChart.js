@@ -77,11 +77,10 @@ function circleChart(){
 		]
 
 		var chart = radialBarChart()
-		.barHeight(250)
+		.barHeight(100)
 		.domain([0,100])
 		.barColors(['green', 'red'])
-		.tickValues([5,10,15])
-    .tickCircleValues([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
+		.tickValues([30,60,90]);
 
 
 		d3.select('#circleChart')
@@ -92,106 +91,24 @@ function circleChart(){
 
 	function getNrOfFalse(data) {
 
+		var totalNrOfPosts = 0;
 		var nrOfFalse = 0;
 		for(var i=0; i<data.length; i++) {
 
+			var temp = 1.;
+			if(data[i]["weight"] != 1) {
+				temp = parseInt(data[i]["weight"].valueOf());
+			}
+
 			if(data[i]["hired"] == "f") {
 
-				nrOfFalse++;
+				nrOfFalse = nrOfFalse + temp;
 			}
+
+			totalNrOfPosts = totalNrOfPosts + temp;
 		}
 
-		output = (nrOfFalse/data.length)*100;
-
-		console.log("nrOfFalse: " + nrOfFalse);
-		console.log("output: " + output);
+		output = (nrOfFalse/totalNrOfPosts)*100;
 		return output;
 	}
-
-
-
-
-
-
-
-
-
-	for(var i=0; i<=24; i++) {
-		
-		//console.log("data[i].time: " + i);
-
-		var deg = (2*Math.PI)/24;
-		var r = 100;
-		var x = Math.cos(i*deg)*r + r;
-		var y = Math.sin(i*deg)*r + r;
-
-		lineData.push({"x": x, "y": y});
-	}
-
-  var lineFunction = d3.svg.line()
-                       .x(function(d) { return d.x; })
-                       .y(function(d) { return d.y; })
-                       .interpolate("cardinal");
-
-  var margin = [10, 10, 10, 10],
-    width = 600 - margin[1] - margin[3], //TODO 600 and 200 dynamically
-    height = 200 - margin[0] - margin[2];
-
-
-  var svg = d3.select("#circleChart").append("svg:svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("svg:g")
-    .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
-
-  // radius scale from 0 to half of min of width/height
-	var rScale = d3.scale.linear().range([0,(Math.min(height,width))/2]);
-
-
-  
-
-  function draw(){
-  	console.log("in function draw");
-
-    hired = svg.append("path")
-      //.attr("class", "hired")
-      //.selectAll("path")
-                  //
-      //.data(self.data)
-      //.enter().append("svg:path")
-      .attr("d", lineFunction(lineData))
-      .style("stroke", "blue")
-      .attr("stroke-width", 2)
-      .attr("fill", "none");
-
-
-
-  }
-
-  function path(d) {
-      
-      //return line(dimensions.map(function(p) { 
-        //  return [x(p), y[p](d[p])]; }));
-
-  }
-
-  function polarToCoord(angle, value) {
-
-  	//motst/hyp = sin(v)
-  	// motst = hyp*sin(v)
-  	// närl/hyp = cos(v)
-  	// närl = hyp*cos(v)
-  }
-
-
-
-
 }
-
-
-
-
-
-
-
-
