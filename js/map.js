@@ -1,6 +1,10 @@
 function map() {
 
+	var self = this;
+
 	console.log("in function map()");
+
+	var file = "data/reducedTable_sortedbyDateTime.csv";
 
 	// Global variables
 	var data;
@@ -10,7 +14,7 @@ function map() {
 	var prevHeatmap;
 	var currHeatmap;
 
-	d3.csv("data/weekOne_sortedbyDateTime.csv", function(error, data) {
+	d3.csv(file, function(error, data) {
 	//d3.csv("data/taxi.csv", function(error, data) {
 		self.data = data;
 		self.tickCounter = 0;
@@ -21,12 +25,16 @@ function map() {
 
 	function run(data) {
 
+		//console.log("in run()");
+
 		// Creates the map
 		initializeMap();
 
+		getOneDay(data, new Date("2013-03-04")); 
+
 		draw(data);
 
-		createHeatMap(createLocArray(0,10000)); //initially shown cars
+		//createHeatMap(createLocArray(data, 0,10000)); //initially shown cars
 	}
 
 	function initializeMap() {
@@ -41,27 +49,14 @@ function map() {
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	}
 
+	this.createHeatMapGlobal = function(data) {
+		createHeatMap(data);	
+	}
+
 	function createHeatMap(data) {
 
-
-		// Create array with lat,long
-		/*
-		var temp = [];
-
-		console.log(data.length)
-		for(i=0; i<data.length; i++) {
-			
-			//console.log("data[i]: " + data[i][x_coord]);
-			//  new google.maps.LatLng(37.782551, -122.445368),
-			var t = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
-			temp.push(t);
-			
-		}*/
 		var temp = data;
-
 		var pointArray = new google.maps.MVCArray(temp);
-
-		//console.log("pointArray.length: " + pointArray.length);
 
   		var heatmap = new google.maps.visualization.HeatmapLayer({
     		data: pointArray
@@ -69,28 +64,28 @@ function map() {
 
   		heatmap.setMap(map);
 
-  		return heatmap;
+		//create heatmap
+		if(self.currHeatmap != null) {
+			self.prevHeatmap = self.currHeatmap;
+			self.currHeatmap = heatmap;
+			self.prevHeatmap.setMap(null);
+		} else {
+			self.currHeatmap = heatmap;
+		}
+
+  		//return heatmap;
 	}
 
-
-
-
 	function draw(data) {
-		//console.log("in function draw()");
 
 		var taxiRoute = storeTaxiRoute(data, 10010);
-		//console.log(taxiRoute);
 		taxiRoute = sortByDate(taxiRoute);
-		//console.log(taxiRoute);
 		var freeTaxis = allFreeOrHiredTaxis(data, "t");
-		google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
+		//google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
 
 	}
 
 	function addMarkers(taxis) {
-		//console.log("in function addMarkers()");
-
-		
 
 		for(i=0; i<taxis.length; i++) {
 
@@ -117,7 +112,6 @@ function map() {
 	}
 
 	function storeTaxiRoute(data, id) {
-		//console.log("in function storeTaxiRoute()");
 
 		var route = [];
 
@@ -133,7 +127,6 @@ function map() {
 	}
 
 	function allFreeOrHiredTaxis(data, wanted) {
-		//console.log("in function allFreeTaxis()");
 
 		var freeTaxis = [];
 
@@ -156,12 +149,12 @@ function map() {
 		return array;
 	}
 
-	function createLocArray(from, to) {
+	function createLocArray(data, from, to) {
 
 		var temp = [];
  
 		for(i=from; i<to; ++i) {
-			var t = new google.maps.LatLng(self.data[i]["y_coord"], self.data[i]["x_coord"]);
+			var t = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
 			temp.push(t);
 		}
 		return temp;
@@ -170,40 +163,64 @@ function map() {
 
 	this.tickMap = function tickMap() {
 
-		this.timer = setInterval(function() {
+		var temp;
+		var countFrom;
+		var countTo;
 
-			//create temp array that is subarray of data set
-			//var temp = [];
+		var timer = setInterval(function() {
 
-			var countFrom = Math.floor(self.tickCounter*(self.data.length/(self.part)));
+			countFrom = Math.floor(self.tickCounter*(self.data.length/(self.part)));
 			self.tickCounter++;
-            var countTo = Math.floor(self.tickCounter*self.data.length/(self.part));
+            countTo = Math.floor(self.tickCounter*self.data.length/(self.part));
 
-            if(countTo > self.data.length && countFrom < self.data.length) {
+            
+            if(countFrom >= self.data.length) {
+            	clearInterval(timer);
+            } else if(countFrom < self.data.length && countTo > self.data.length) {
             	countTo = self.data.length;
-            } else if(countFrom > self.data.length) {
-            	clearInterval(this.timer);
+				temp = createLocArray(self.data, countFrom, countTo);
+				createHeatMap(temp);
+            } else {
+				temp = createLocArray(self.data, countFrom, countTo);
+				createHeatMap(temp);
             }
-            //console.log(countFrom)
-            /*
-			for(i=countFrom; i<countTo; ++i) {
-				var t = new google.maps.LatLng(self.data[i]["y_coord"], self.data[i]["x_coord"]);
-				temp.push(t);
-			}*/
-			var temp = createLocArray(countFrom, countTo);
-
-			//create heatmap
-			if(self.currHeatmap != null) {
-				self.prevHeatmap = self.currHeatmap;
-				self.currHeatmap = createHeatMap(temp);
-				self.prevHeatmap.setMap(null);
-			} else {
-				self.currHeatmap = createHeatMap(temp);
-			}
-
-
         }
         , 100);
 	}
+
+	function getOneDay(data, searchDate) {
+
+		var temp = [];
+
+		for(i=0; i<data.length; ++i) {
+
+			var d = new Date(data[i].date);
+
+			if(+d == +searchDate) {
+				temp.push(data[i]);
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
