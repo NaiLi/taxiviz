@@ -7,7 +7,6 @@ function circleChart(){
 	var self = this;
 	var ccDiv = $("circleChart");
 	var data;
-	var innerShowing = "hired";
 
 	var hired;
 	var lineData = [];
@@ -30,23 +29,43 @@ function circleChart(){
 
 	function createCircleChart(data) {
 
-		var l = data.length;
-		console.log("data.length: " + l);
+		//TESTING TO CREATE COLORS
+		var colors = [];
+		colors.push("red");
+		for(var i=0; i<23; i++) {
+			colors.push("	green");
+		}
 
-		var chartData = createChartData(data);
+		// Creating circle chart of free cars
+		var chartDataFree = createChartData(data, "free");
 
 		var chart = radialBarChart()
-		.barHeight(100)
+		.barHeight(150)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
-		.barColors(['#B66199', '#9392CB', '#76D9FA'])
+		.barColors(createColors())
 		.domain([0,100])
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
+		d3.select('#circleChart1')
+		.datum(chartDataFree)
+		.call(chart);
 
-		d3.select('#circleChart')
-		.datum(chartData)
+		// Creating circle chart of hired cars
+		var chartDataHired = createChartData(data, "hired");
+		
+		var chart = radialBarChart()
+		.barHeight(150)
+		.reverseLayerOrder(false)
+		.capitalizeLabels(true)
+		.barColors(createColors())
+		.domain([0,100])
+		.tickValues([30,60,90])
+		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
+
+		d3.select('#circleChart2')
+		.datum(chartDataHired)
 		.call(chart);
 
 	}
@@ -97,8 +116,25 @@ function circleChart(){
 		return output;
 	}
 
+	//Create color array
+	function createColors() {
+
+		var colors = [];
+		for(var i=0; i<24; i++) {
+			// Night
+			if(i>5 && i<18) {
+				colors.push("#31567A");
+			}
+			// Day
+			else {
+				colors.push("#FBFF8F");
+			}
+		}
+		return colors;
+	}
+
 	// Creating data showing hired cars in the middle
-	function createChartData(data) {
+	function createChartData(data, innerShowing) {
 
 		var h00_outer = h01_outer = h02_outer = h03_outer = h04_outer = h05_outer = h06_outer = h07_outer = h08_outer = h09_outer = h10_outer = h11_outer = 
 				h12_outer = h13_outer = h14_outer = h15_outer = h16_outer = h17_outer = h18_outer = h19_outer = h20_outer = h21_outer = h22_outer = h23_outer =  100;	
