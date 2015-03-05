@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/circleChart.css">
+		<link rel="stylesheet" href="css/circular-slider.css">
 		
 
 
@@ -23,19 +24,22 @@
 <!--
 			<iframe id="map" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=59.3293%2C18.0686&key=AIzaSyDgnzAjf7Bb5xCRdUUcdS_1R2s1TN-EEko"></iframe>
 -->
+		<h1>Taxiviz</h1>
+		<h3>Taxivisualisering Stockholm mars 2013</h3>
 		<div class="row">
 			<div class="left">
 				<div id="map" style="width:100vh"></div>
 				<input type="button" value="tick" onclick="map.tickMap();"/>
-				<div id="interaction" style="width:80vh">
-					<input type="range" min="1" max="24" id="weekslide" class="slider" step="1" style="width:80vh" value="1" list="steps">
-
+				<div id="interaction" style="width:100vh">
+					<input type="range" min="1" max="24" id="slider" step="1" style="width:100%" value="1" list="steps">
 				</div>
+				<div id="slider2"></div>
 			</div>
 			<div class="right">
 				<div id="circleChart" style="width:30vh"></div>
 			</div>
 		</div>
+
 <!--
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 -->
@@ -47,6 +51,8 @@
 		<script src="js/vendor/topojson.v1.min.js"></script>
 		<script src="js/vendor/underscore-min.js"></script>
 		<script src="js/vendor/colorbrewer.js"></script>
+		<!--<script src="js/vendor/circular-slider/dist/circular-slider.min.js"></script>-->
+		<script src="js/vendor/circular-slider/src/circular-slider.js"></script>
 		
 		<!-- GOOGLE -->
 		<script type="text/javascript"

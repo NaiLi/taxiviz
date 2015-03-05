@@ -36,6 +36,7 @@ function map() {
 		var stockholm = new google.maps.LatLng(59.326142,17.9875455);
 
 		var mapOptions = {
+   	 	  mapTypeId: google.maps.MapTypeId.SATELLITE,
 		  zoom: 11,
 		  center: stockholm
 		}
@@ -164,19 +165,20 @@ function map() {
 
 		var hour = 0;
 		var day = self.day;
+		var slider;
+		slider = document.getElementById("slider");
 
 		var timer = setInterval(function() {
 
 			if(hour > 23) {
-				console.log("over")
+				slider.value = 0;
 				clearInterval(timer);
 			}
 
 			var dh = self.getHourOf(day,hour);
 			dh = createLocArray(dh, 0, dh.length-1);
 			createHeatMap(dh);
-
-			var slider = document.getElementById("weekslide");
+			
 			slider.value = hour;
 
 			hour++;
