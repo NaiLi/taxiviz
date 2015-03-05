@@ -29,69 +29,43 @@ function circleChart(){
 
 	function createCircleChart(data) {
 
-		var l = data.length;
-		console.log("data.length: " + l);
+		//TESTING TO CREATE COLORS
+		var colors = [];
+		colors.push("red");
+		for(var i=0; i<23; i++) {
+			colors.push("	green");
+		}
 
-		var h00_t = h01_t = h02_t = h03_t = h04_t = h05_t = h06_t = h07_t = h08_t = h09_t = h10_t = h11_t = 
-				h12_t = h13_t = h14_t = h15_t = h16_t = h17_t = h18_t = h19_t = h20_t = h21_t = h22_t = h23_t =  100;	
-
-		// TODO data should be the data for only chosen day
-		var data1 = map.getOneDay(data, new Date("2013-03-04"));
-
-		var h00_f = getNrOfFalse(map.getHourOf(data1, 00));
-		var h01_f = getNrOfFalse(map.getHourOf(data1, 01));
-		var h02_f = getNrOfFalse(map.getHourOf(data1, 02));
-		var h03_f = getNrOfFalse(map.getHourOf(data1, 03));
-		var h04_f = getNrOfFalse(map.getHourOf(data1, 04));
-		var h05_f = getNrOfFalse(map.getHourOf(data1, 05));
-		var h06_f = getNrOfFalse(map.getHourOf(data1, 06));
-		var h07_f = getNrOfFalse(map.getHourOf(data1, 07));
-		var h08_f = getNrOfFalse(map.getHourOf(data1, 08));
-		var h09_f = getNrOfFalse(map.getHourOf(data1, 09));
-		var h10_f = getNrOfFalse(map.getHourOf(data1, 10));
-		var h11_f = getNrOfFalse(map.getHourOf(data1, 11));
-		var h12_f = getNrOfFalse(map.getHourOf(data1, 12));
-		var h13_f = getNrOfFalse(map.getHourOf(data1, 13));
-		var h14_f = getNrOfFalse(map.getHourOf(data1, 14));
-		var h15_f = getNrOfFalse(map.getHourOf(data1, 15));
-		var h16_f = getNrOfFalse(map.getHourOf(data1, 16));
-		var h17_f = getNrOfFalse(map.getHourOf(data1, 17));
-		var h18_f = getNrOfFalse(map.getHourOf(data1, 18));
-		var h19_f = getNrOfFalse(map.getHourOf(data1, 19));
-		var h20_f = getNrOfFalse(map.getHourOf(data1, 20));
-		var h21_f = getNrOfFalse(map.getHourOf(data1, 21));
-		var h22_f = getNrOfFalse(map.getHourOf(data1, 22));
-		var h23_f = getNrOfFalse(map.getHourOf(data1, 23));
-	
-
-		var chartData = [	{	"Hired": true,
-												"data": {	00: h00_t, 01: h01_t, 02: h02_t, 03: h03_t, 04: h04_t, 05: h05_t, 
-																	06: h06_t, 07: h07_t, 08: h08_t, 09: h09_t, 10: h10_t, 11: h11_t, 
-																	12: h12_t, 13: h13_t, 14: h14_t, 15: h15_t, 16: h16_t, 17: h17_t, 
-																	18: h18_t, 19: h19_t, 20: h20_t, 21: h21_t, 22: h22_t, 23: h23_t
-																}
-		  								},
-		  								{ "Hired": false,
-												"data": {	00: h00_f, 01: h01_f, 02: h02_f, 03: h03_f, 04: h04_f, 05: h05_f, 
-																	06: h06_f, 07: h07_f, 08: h08_f, 09: h09_f, 10: h10_f, 11: h11_f, 
-																	12: h12_f, 13: h13_f, 14: h14_f, 15: h15_f, 16: h16_f, 17: h17_f, 
-																	18: h18_f, 19: h19_f, 20: h20_f, 21: h21_f, 22: h22_f, 23: h23_f,
-																}
-												}
-		]
+		// Creating circle chart of free cars
+		var chartDataFree = createChartData(data, "free");
 
 		var chart = radialBarChart()
-		.barHeight(250)
+		.barHeight(150)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
-		.barColors(['#B66199', '#9392CB', '#76D9FA'])
+		.barColors(createColors())
 		.domain([0,100])
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
+		d3.select('#circleChart1')
+		.datum(chartDataFree)
+		.call(chart);
 
-		d3.select('#circleChart')
-		.datum(chartData)
+		// Creating circle chart of hired cars
+		var chartDataHired = createChartData(data, "hired");
+		
+		var chart = radialBarChart()
+		.barHeight(150)
+		.reverseLayerOrder(false)
+		.capitalizeLabels(true)
+		.barColors(createColors())
+		.domain([0,100])
+		.tickValues([30,60,90])
+		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
+
+		d3.select('#circleChart2')
+		.datum(chartDataHired)
 		.call(chart);
 
 	}
@@ -117,5 +91,133 @@ function circleChart(){
 
 		output = (nrOfFalse/totalNrOfPosts)*100;
 		return output;
+	}
+
+	function getNrOfTrue(data) {
+
+		var totalNrOfPosts = 0;
+		var nrOfTrue = 0;
+		for(var i=0; i<data.length; i++) {
+
+			var temp = 1.;
+			if(data[i]["weight"] != 1) {
+				temp = parseInt(data[i]["weight"].valueOf());
+			}
+
+			if(data[i]["hired"] == "t") {
+
+				nrOfTrue = nrOfTrue + temp;
+			}
+
+			totalNrOfPosts = totalNrOfPosts + temp;
+		}
+
+		output = (nrOfTrue/totalNrOfPosts)*100;
+		return output;
+	}
+
+	//Create color array
+	function createColors() {
+
+		var colors = [];
+		for(var i=0; i<24; i++) {
+			// Night
+			if(i>5 && i<18) {
+				colors.push("#31567A");
+			}
+			// Day
+			else {
+				colors.push("#FBFF8F");
+			}
+		}
+		return colors;
+	}
+
+	// Creating data showing hired cars in the middle
+	function createChartData(data, innerShowing) {
+
+		var h00_outer = h01_outer = h02_outer = h03_outer = h04_outer = h05_outer = h06_outer = h07_outer = h08_outer = h09_outer = h10_outer = h11_outer = 
+				h12_outer = h13_outer = h14_outer = h15_outer = h16_outer = h17_outer = h18_outer = h19_outer = h20_outer = h21_outer = h22_outer = h23_outer =  100;	
+
+		// Extracting data from one chosen day
+		var data1 = map.getOneDay(data, new Date("2013-03-04"));
+
+		if(innerShowing == "free") {
+
+			console.log("Showing free cars in the middle");
+
+			var h00_inner = getNrOfFalse(map.getHourOf(data1, 00));
+			var h01_inner = getNrOfFalse(map.getHourOf(data1, 01));
+			var h02_inner = getNrOfFalse(map.getHourOf(data1, 02));
+			var h03_inner = getNrOfFalse(map.getHourOf(data1, 03));
+			var h04_inner = getNrOfFalse(map.getHourOf(data1, 04));
+			var h05_inner = getNrOfFalse(map.getHourOf(data1, 05));
+			var h06_inner = getNrOfFalse(map.getHourOf(data1, 06));
+			var h07_inner = getNrOfFalse(map.getHourOf(data1, 07));
+			var h08_inner = getNrOfFalse(map.getHourOf(data1, 08));
+			var h09_inner = getNrOfFalse(map.getHourOf(data1, 09));
+			var h10_inner = getNrOfFalse(map.getHourOf(data1, 10));
+			var h11_inner = getNrOfFalse(map.getHourOf(data1, 11));
+			var h12_inner = getNrOfFalse(map.getHourOf(data1, 12));
+			var h13_inner = getNrOfFalse(map.getHourOf(data1, 13));
+			var h14_inner = getNrOfFalse(map.getHourOf(data1, 14));
+			var h15_inner = getNrOfFalse(map.getHourOf(data1, 15));
+			var h16_inner = getNrOfFalse(map.getHourOf(data1, 16));
+			var h17_inner = getNrOfFalse(map.getHourOf(data1, 17));
+			var h18_inner = getNrOfFalse(map.getHourOf(data1, 18));
+			var h19_inner = getNrOfFalse(map.getHourOf(data1, 19));
+			var h20_inner = getNrOfFalse(map.getHourOf(data1, 20));
+			var h21_inner = getNrOfFalse(map.getHourOf(data1, 21));
+			var h22_inner = getNrOfFalse(map.getHourOf(data1, 22));
+			var h23_inner = getNrOfFalse(map.getHourOf(data1, 23));
+
+		}
+		else if (innerShowing == "hired") {
+			console.log("Showing hired cars in the middle");
+
+			var h00_inner = getNrOfTrue(map.getHourOf(data1, 00));
+			var h01_inner = getNrOfTrue(map.getHourOf(data1, 01));
+			var h02_inner = getNrOfTrue(map.getHourOf(data1, 02));
+			var h03_inner = getNrOfTrue(map.getHourOf(data1, 03));
+			var h04_inner = getNrOfTrue(map.getHourOf(data1, 04));
+			var h05_inner = getNrOfTrue(map.getHourOf(data1, 05));
+			var h06_inner = getNrOfTrue(map.getHourOf(data1, 06));
+			var h07_inner = getNrOfTrue(map.getHourOf(data1, 07));
+			var h08_inner = getNrOfTrue(map.getHourOf(data1, 08));
+			var h09_inner = getNrOfTrue(map.getHourOf(data1, 09));
+			var h10_inner = getNrOfTrue(map.getHourOf(data1, 10));
+			var h11_inner = getNrOfTrue(map.getHourOf(data1, 11));
+			var h12_inner = getNrOfTrue(map.getHourOf(data1, 12));
+			var h13_inner = getNrOfTrue(map.getHourOf(data1, 13));
+			var h14_inner = getNrOfTrue(map.getHourOf(data1, 14));
+			var h15_inner = getNrOfTrue(map.getHourOf(data1, 15));
+			var h16_inner = getNrOfTrue(map.getHourOf(data1, 16));
+			var h17_inner = getNrOfTrue(map.getHourOf(data1, 17));
+			var h18_inner = getNrOfTrue(map.getHourOf(data1, 18));
+			var h19_inner = getNrOfTrue(map.getHourOf(data1, 19));
+			var h20_inner = getNrOfTrue(map.getHourOf(data1, 20));
+			var h21_inner = getNrOfTrue(map.getHourOf(data1, 21));
+			var h22_inner = getNrOfTrue(map.getHourOf(data1, 22));
+			var h23_inner = getNrOfTrue(map.getHourOf(data1, 23));
+
+		}
+		
+		var chartData = [	{	"Outer": true,
+												"data": {	00: h00_outer, 01: h01_outer, 02: h02_outer, 03: h03_outer, 04: h04_outer, 05: h05_outer, 
+																	06: h06_outer, 07: h07_outer, 08: h08_outer, 09: h09_outer, 10: h10_outer, 11: h11_outer, 
+																	12: h12_outer, 13: h13_outer, 14: h14_outer, 15: h15_outer, 16: h16_outer, 17: h17_outer, 
+																	18: h18_outer, 19: h19_outer, 20: h20_outer, 21: h21_outer, 22: h22_outer, 23: h23_outer
+																}
+		  								},
+		  								{ "Inner": false,
+												"data": {	00: h00_inner, 01: h01_inner, 02: h02_inner, 03: h03_inner, 04: h04_inner, 05: h05_inner, 
+																	06: h06_inner, 07: h07_inner, 08: h08_inner, 09: h09_inner, 10: h10_inner, 11: h11_inner, 
+																	12: h12_inner, 13: h13_inner, 14: h14_inner, 15: h15_inner, 16: h16_inner, 17: h17_inner, 
+																	18: h18_inner, 19: h19_inner, 20: h20_inner, 21: h21_inner, 22: h22_inner, 23: h23_inner,
+																}
+												}
+		]
+
+		return chartData;
 	}
 }

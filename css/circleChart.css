@@ -1,51 +1,68 @@
-#circleChart {
+#circleChart1,
+#circleChart2 {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 14px;
 }
-#circleChart path {
+#circleChart1 path,
+#circleChart2 path {
   fill: none;
 }
 
 /* layers */
-#circleChart .layer-0 path {
+#circleChart1 .layer-0 path, 
+#circleChart2 .layer-0 path {
   fill: steelblue;
-}
-#circleChart .layer-1 path {
-  fill: green !important;
   opacity: 0.5;
+}
+#circleChart1 .layer-1 path {
+  fill: green !important;
+  opacity: 0.7;
+  stroke-width: 1px;
+  stroke: #333;
+} 
+#circleChart2 .layer-1 path {
+  fill: red !important;
+  opacity: 0.7;
   stroke-width: 1px;
   stroke: #333;
 }
 
 /* Outer circle, tick-circles and spokes */
-#circleChart circle.outer {
+#circleChart1 circle.outer,
+#circleChart2 circle.outer{
   stroke: #aaa;
   stroke-dasharray: 4, 4;  
 }
-#circleChart .tick-circles circle {
+#circleChart1 .tick-circles circle,
+#circleChart2 .tick-circles circle{
   stroke: #ddd;
   stroke-dasharray: 2, 2;  
 }
-#circleChart .spokes line {
+#circleChart1 .spokes line,
+#circleChart2 .spokes line{
   stroke: #666;
   stroke-width: 0.2;
 }
 
 /* Axis */
-#circleChart .axis text {
+#circleChart1 .axis text,
+#circleChart2 .axis text{
   font-size: 11px;
 }
-#circleChart .axis path {
+#circleChart1 .axis path,
+#circleChart2 .axis path{
   stroke: #999;
   shape-rendering: crispEdges;
 }
-#circleChart .axis line {
+#circleChart1 .axis line,
+#circleChart2 .axis line{
   stroke: #999;
   shape-rendering: crispEdges;
 }
 
 /* Labels */
-#circleChart .labels text {
+#circleChart1 .labels text,
+#circleChart2  .labels text{
   fill: #333;
   font-size: 10px;
   font-weight: 500;
