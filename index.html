@@ -23,12 +23,19 @@
 <!--
 			<iframe id="map" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=59.3293%2C18.0686&key=AIzaSyDgnzAjf7Bb5xCRdUUcdS_1R2s1TN-EEko"></iframe>
 -->
-		<div id="interaction">
-			<input type="range" min="1" max="7"id="weekslide" class="slider" step="1">
+		<div class="row">
+			<div class="left">
+				<div id="map" style="width:100vh"></div>
+				<input type="button" value="tick" onclick="map.tickMap();"/>
+				<div id="interaction" style="width:80vh">
+					<input type="range" min="1" max="24" id="weekslide" class="slider" step="1" style="width:80vh" value="1" list="steps">
+
+				</div>
+			</div>
+			<div class="right">
+				<div id="circleChart" style="width:30vh"></div>
+			</div>
 		</div>
-		<div id="circleChart" style="float:right; width:50%; height:600px"></div>
-		<div id="map" style="width:50%; height:600px"></div>
-		<input type="button" value="tick" onclick="map.tickMap();"/>
 <!--
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 -->

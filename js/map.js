@@ -8,6 +8,7 @@ function map() {
 	// Global variables
 	var file = "data/reducedTable_sortedbyDateTime.csv";
 	var data;
+	var day;
 	var map;
 	var tickCounter;
 	var part;
@@ -15,27 +16,19 @@ function map() {
 	var currHeatmap;
 
 	d3.csv(file, function(error, data) {
-	//d3.csv("data/taxi.csv", function(error, data) {
 		self.data = data;
-		self.tickCounter = 0;
-		self.part = 7*24;
 		run(data);
 
 	});
 
 	function run(data) {
 
-		//console.log("in run()");
-
 		// Creates the map
 		initializeMap();
 
-		var day = self.getOneDay(data, new Date("2013-03-04")); 
-		var hour = self.getHourOf(day,17);
-
-		draw(data);
-
-		//createHeatMap(createLocArray(data, 0,10000)); //initially shown cars
+		self.day = self.getOneDay(data, new Date("2013-03-04")); 
+		var hour = self.getHourOf(self.day,0);
+		draw(hour);
 	}
 
 	function initializeMap() {
@@ -60,7 +53,7 @@ function map() {
 		var pointArray = new google.maps.MVCArray(temp);
 
   		var heatmap = new google.maps.visualization.HeatmapLayer({
-    		data: pointArray
+    		data: data//pointArray
   		});
 
   		heatmap.setMap(map);
@@ -79,9 +72,11 @@ function map() {
 
 	function draw(data) {
 
-		var taxiRoute = storeTaxiRoute(data, 10010);
-		taxiRoute = sortByDate(taxiRoute);
-		var freeTaxis = allFreeOrHiredTaxis(data, "t");
+		createHeatMap(createLocArray(data, 0, data.length-1));
+
+		//var taxiRoute = storeTaxiRoute(data, 10010);
+		//taxiRoute = sortByDate(taxiRoute);
+		//var freeTaxis = allFreeOrHiredTaxis(data, "t");
 		//google.maps.event.addDomListener(window, 'load', addMarkers(taxiRoute));
 
 	}
@@ -103,7 +98,6 @@ function map() {
 
 				var marker = new google.maps.Marker({
 				    position: myLatlng,
-				    //map: map,
 				    title:"Taxi 2",
 				    icon: image
 				});
@@ -153,40 +147,41 @@ function map() {
 	function createLocArray(data, from, to) {
 
 		var temp = [];
- 
+
 		for(i=from; i<to; ++i) {
-			var t = new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]);
-			temp.push(t);
+			obj = {
+				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
+				weight: (data[i]["weight"]/4)
+			}
+			temp.push(obj);
 		}
 		return temp;
 	}
 	
 
 	this.tickMap = function tickMap() {
+		console.log("in tick");
 
-		var temp;
-		var countFrom;
-		var countTo;
+		var hour = 0;
+		var day = self.day;
 
 		var timer = setInterval(function() {
 
-			countFrom = Math.floor(self.tickCounter*(self.data.length/(self.part)));
-			self.tickCounter++;
-            countTo = Math.floor(self.tickCounter*self.data.length/(self.part));
+			if(hour > 23) {
+				console.log("over")
+				clearInterval(timer);
+			}
 
-            
-            if(countFrom >= self.data.length) {
-            	clearInterval(timer);
-            } else if(countFrom < self.data.length && countTo > self.data.length) {
-            	countTo = self.data.length;
-				temp = createLocArray(self.data, countFrom, countTo);
-				createHeatMap(temp);
-            } else {
-				temp = createLocArray(self.data, countFrom, countTo);
-				createHeatMap(temp);
-            }
-        }
-        , 100);
+			var dh = self.getHourOf(day,hour);
+			dh = createLocArray(dh, 0, dh.length-1);
+			createHeatMap(dh);
+
+			var slider = document.getElementById("weekslide");
+			slider.value = hour;
+
+			hour++;
+
+		}, 500);
 	}
 
 	//collects all sub data of one date. Not depending on sorting. 
@@ -208,40 +203,23 @@ function map() {
 	//collects all sub data of one hour from data consisting of only one day
 	this.getHourOf = function getHourOf(dayData, hour) {
 
-		var temp = [];
-		var hourstr = (hour<10) ? "0"+hour : hour;
-		var str;
+		if(dayData) {
 
-		for(i=0; i<dayData.length; ++i) {
 
-			str = dayData[i]["time"].substring(0,2);
-			
-			if(str == hourstr) {
-				temp.push(dayData[i]);
+			var temp = [];
+			var hourstr = (hour<10) ? "0"+hour : hour;
+			var str;
+
+			for(i=0; i<dayData.length; ++i) {
+
+				str = dayData[i]["time"].substring(0,2);
+				
+				if(str == hourstr) {
+					temp.push(dayData[i]);
+				}
 			}
+			return temp;
 		}
-		return temp;
+		return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
