@@ -17,11 +17,6 @@ function radialBarChart() {
     }
   }
 
-  for(var i=0; i<hours.length; i++) {
-    console.log("hours[i]: " + hours[i]);
-  }
-
-  console.log("hours.length: " + hours.length);
 
   // Configurable variables
   var margin = {top: 20, right: 20, bottom: 20, left: 20};
