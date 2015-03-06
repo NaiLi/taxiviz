@@ -68,6 +68,10 @@
 	float: bottom;
 }
 
+h1 {
+	font-family: "Verdana", "San-Serif";
+	text-transform: uppercase;
+}
 
 
 

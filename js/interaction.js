@@ -7,6 +7,7 @@ function interaction() {
 	var div = $("#interaction");
 	var slider = $("#slider");
 
+/*
 	var slider2 = $('#slider2').CircularSlider({
 	    radius: 75,
 	    innerCircleRatio: '0.5',
@@ -35,7 +36,7 @@ function interaction() {
 	    	return num;
 	    }
 	});
-
+*/
 	function setSliderValue() {
 
 	}
@@ -59,7 +60,8 @@ function interaction() {
 
 
 	var interaction = d3.select("#interaction");
-	
+
+/*	
 	var svg = interaction.append("svg:svg")
     .attr("class", "show");
 
@@ -70,7 +72,7 @@ function interaction() {
 		self.data = data;
 		run(data);
 	});
-
+*/
 	function run(data) {
 		self.day = map.getOneDay(data, new Date("2013-03-04"));
 	}
