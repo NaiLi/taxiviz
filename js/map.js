@@ -43,18 +43,31 @@ function map() {
 
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	}
-
+/*
 	this.createHeatMapGlobal = function(data) {
 		createHeatMap(data);	
 	}
-
+*/
 	function createHeatMap(data) {
 
 		var temp = data;
 		var pointArray = new google.maps.MVCArray(temp);
 
   		var heatmap = new google.maps.visualization.HeatmapLayer({
-    		data: data//pointArray
+    		// CREATING COLORS FOR HEATMAP, COLORBLINDNESS!
+    		gradient: [	'rgba(125, 255, 0  , 0)',
+    					'rgba(115, 244, 21 , 1)', 
+    					'rgba(104, 232, 43 , 1)', 
+    					'rgba(94 , 221, 64 , 1)', 
+    					'rgba(83 , 210, 85 , 1)', 
+    					'rgba(73 , 198, 106, 1)', 
+    					'rgba(62 , 187, 128, 1)', 
+    					'rgba(52 , 176, 149, 1)', 
+    					'rgba(42 , 164, 170, 1)', 
+    					'rgba(31 , 153, 191, 1)', 
+    					'rgba(21 , 142, 212, 1)'],
+    		// SETTING THE DATA FOR HEATMAP
+    		data: data
   		});
 
   		heatmap.setMap(map);
