@@ -28,15 +28,10 @@
 			<div id="leftSide" class="left">
 				<div id="header">
 					<h1> 
-						TAXIVIS FTW!
+						Taxivis
 					</h1>
 				</div>
 				<div id="circleChart1">
-					<h1>
-						HEJ
-					</h1>
-				</div>
-				<div id="circleChart2">
 					<h1>
 						HEJ
 					</h1>
@@ -49,14 +44,17 @@
 				</div>
 				<div id="slider2"></div>
 			</div>
-			<div class="right">
-				<div id="circleChart1" style="width:30vh"></div>
-			</div>
-			<div class="right">
-				<div id="circleChart2" style="width:30vh"></div>
+			
+
 -->
 			</div>
 			<div id="rightSide">
+				<input type="button" value="tick" onclick="map.tickMap();"/>
+				<div id="interaction">
+					<input type="range" min="1" max="24" id="slider" step="1" style="width:100%" value="1" list="steps">
+				</div>
+				<div id="slider2">
+				</div>
 				<div id="map">
 				</div>
 				<div id="slider2"></div>
@@ -76,7 +74,7 @@
 		<script src="js/vendor/underscore-min.js"></script>
 		<script src="js/vendor/colorbrewer.js"></script>
 		<!--<script src="js/vendor/circular-slider/dist/circular-slider.min.js"></script>-->
-		<script src="js/vendor/circular-slider/src/circular-slider.js"></script>
+		<!-- <script src="js/vendor/circular-slider/src/circular-slider.js"></script>-->
 		
 		<!-- GOOGLE -->
 		<script type="text/javascript"
