@@ -20,7 +20,7 @@ function interaction() {
 	    shape: "Circle",
 	    touch: true,
 	    animate: true,
-	    animateDuration : 360,
+	    animateDuration : 24,
 	    selectable: false,
 	    slide: function(ui, value) {
 	    	var color = 'coral';
