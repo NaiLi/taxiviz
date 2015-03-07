@@ -2,9 +2,6 @@ function map() {
 
 	var self = this;
 
-	console.log("in function map()");
-
-
 	// Global variables
 	var file = "data/reducedTable_sortedbyDateTime.csv";
 	var data;
@@ -199,7 +196,6 @@ function map() {
 	
 
 	this.tickMap = function tickMap() {
-		console.log("in tick");
 
 		// UGLY HACK, NO IDEA WHY IT WORKS WITH A 2 HERE
 		var hour = 2;
@@ -208,7 +204,6 @@ function map() {
 		slider = document.getElementById("slider");
 
 		var timer = setInterval(function() {
-			console.log("slider.value: " + slider.value);
 			
 			slider.value = hour;
 

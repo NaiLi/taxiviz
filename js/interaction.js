@@ -7,7 +7,7 @@ function interaction() {
 	var div = $("#interaction");
 	var slider = $("#slider");
 
-/*
+
 	var slider2 = $('#slider2').CircularSlider({
 	    radius: 75,
 	    innerCircleRatio: '0.5',
@@ -16,8 +16,8 @@ function interaction() {
 	    max: 23,
 	    value: 0,
 	    clockwise: true,
-	    labelSuffix: "he",
-	    labelPrefix: "ho",
+	    labelSuffix: "",
+	    labelPrefix: "",
 	    shape: "Circle",
 	    touch: true,
 	    animate: true,
@@ -36,7 +36,7 @@ function interaction() {
 	    	return num;
 	    }
 	});
-*/
+
 	function setSliderValue() {
 
 	}
@@ -68,17 +68,19 @@ function interaction() {
     var g = svg.append("svg:g")
     .style("height", 20);
 
+*/
 	d3.csv(file, function(data) {
 		self.data = data;
 		run(data);
 	});
-*/
+
 	function run(data) {
 		self.day = map.getOneDay(data, new Date("2013-03-04"));
 	}
 	
 	var slide = d3.select("#slider").on("input", function() {
 
+		num = this.value;
 		var hourData = map.getHourOf(self.day, num);
 
 		map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
