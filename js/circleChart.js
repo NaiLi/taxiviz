@@ -5,7 +5,6 @@ function circleChart(){
 	//var file = "data/weekOne_sortedbyDateTime.csv";
 	
 	var self = this;
-	var ccDiv = $("circleChart");
 	var data;
 
 	var hired;
@@ -40,7 +39,7 @@ function circleChart(){
 		var chartDataFree = createChartData(data, "free");
 
 		var chart = radialBarChart()
-		.barHeight(150)
+		.barHeight(100)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
 		.barColors(createColors())
@@ -48,7 +47,7 @@ function circleChart(){
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
-		d3.select('#circleChart1')
+		d3.select('#circleChart')
 		.datum(chartDataFree)
 		.call(chart);
 	}
