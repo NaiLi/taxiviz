@@ -84,6 +84,9 @@ function interaction() {
 		var hourData = map.getHourOf(self.day, num);
 
 		map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
+		
+		circleChart.updateGlobal(num);
+
 	});
 
 	function createLocArray(data, from, to) {
