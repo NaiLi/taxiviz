@@ -33,6 +33,8 @@ function interaction() {
 			var hourData = map.getHourOf(self.day, value);
 			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
 			//slider2.setValue(num);
+			num = (num<10) ? "0" + num : num;
+			num = num + ":00";
 	    	return num;
 	    }
 	});
