@@ -42,6 +42,7 @@ function radialBarChart() {
 	var chosen = 0;
   chart.setChosen = function(value) {
     chart.chosen = value;
+    chosen = value;
 
     //console.log("set chosen to " + chart.chosen)
 
@@ -234,44 +235,28 @@ function radialBarChart() {
 
         });
 
-      if (firstChartDrawing) {
-	      segments
-	        .enter()
-	        .append('path')
-	        .style('fill', function(d, i) {
-	          if(!barColors) return "";
+      var colorFunction = function(d, i) {
+          if(!barColors) return "";
 
-	          //var test = chart.updateGlobal();
-	          //console.log("test: " + test);
-	          //console.log("chosen: " + chosen);
-	          if(i == chosen) {
-	          	//chosen = chosen+1;
-	            return "blue";
-	          }
-	          return barColors[i % barColors.length];
-	        });
-     			segments.exit().remove();
-	        firstChartDrawing = false;
-	    } else {
+          //var test = chart.updateGlobal();
+          //console.log("test: " + test);
+          //console.log("chosen: " + chosen);
+          if(i == chosen) {
+          	//chosen = chosen+1;
+            return "blue";
+          }
+          return barColors[i % barColors.length];
+        };
 
-	      segments
-	        .selectAll('path')
-	        .style('fill', function(d, i) {
-	          if(!barColors) return "";
-
-	          //var test = chart.updateGlobal();
-	          //console.log("test: " + test);
-	          //console.log("chosen: " + chosen);
-	          if(i == chosen) {
-	          	//chosen = chosen+1;
-	            return "blue";
-	          }
-	          return barColors[i % barColors.length];
-	        });
-	    }
-
-
-      
+      segments.style('fill', colorFunction);
+    
+      segments
+        .enter()
+        .append('path')
+        .style('fill', colorFunction);
+   			segments.exit().remove();
+        firstChartDrawing = false;
+    
       segments
         .transition()
         .duration(transitionDuration)
