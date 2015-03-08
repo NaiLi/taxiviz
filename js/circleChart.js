@@ -6,6 +6,7 @@ function circleChart(){
 	
 	var self = this;
 	var data;
+	var chartData;
 	var chart;
 	var chosen = 0;
 
@@ -22,8 +23,11 @@ function circleChart(){
 
 	function run(data) {
 	
-		var test = data.length;
-		console.log("test: " + test);
+		console.log("data.length: " + data.length);
+
+		chartData = createChartData(data, "free");
+
+		console.log("chartData.length: " + chartData.length);
 		//draw();
 		createCircleChart(data);
 	};
@@ -37,8 +41,8 @@ function circleChart(){
 	 	if(chart!=undefined) {
 	 		chart.setChosen(hour);
 		
-		  	d3.select('#chart')
-		    	.datum(data)
+		  	d3.select('#circleChart')
+		    	.datum(chartData)
 		    	.call(chart);
 	 	}
 	 	//chart.setChosenPieceGlobal();
@@ -47,8 +51,6 @@ function circleChart(){
 	}
 
 	function createCircleChart(data) {
-
-		console.log("HIT KOMMER JAG");
 
 		//TESTING TO CREATE COLORS
 		var colors = [];
@@ -60,6 +62,7 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
+		console.log("DEN HÄR SKA VA MER: ", chartData);
 
 		chart = radialBarChart()
 		.barHeight(100)
@@ -175,8 +178,6 @@ function circleChart(){
 
 		if(innerShowing == "free") {
 
-			console.log("Showing free cars in the middle");
-
 			var h00_inner = getNrOfFalse(h00);
 			var h01_inner = getNrOfFalse(h01);
 			var h02_inner = getNrOfFalse(h02);
@@ -204,7 +205,6 @@ function circleChart(){
 
 		}
 		else if (innerShowing == "hired") {
-			console.log("Showing hired cars in the middle");
 
 			var h00_inner = getNrOfTrue(h00);
 			var h01_inner = getNrOfTrue(h01);

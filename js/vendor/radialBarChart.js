@@ -39,11 +39,11 @@ function radialBarChart() {
 	}
 
 	// CREATEING VARIABLE FOR CHOSEN PIECE
-	var chosen = 3;
+	var chosen = 0;
   chart.setChosen = function(value) {
     chart.chosen = value;
 
-    console.log("set chosen " + chart.chosen)
+    console.log("set chosen to " + chart.chosen)
   }
 /*
 	// GLOBAL FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
@@ -166,11 +166,16 @@ function radialBarChart() {
       .text(function(d) { return hours[d] ;});
   }
 
+  var firstChartDrawing = true;
   function chart(selection) {
-    console.log("HÄR ÄR JAG" + chosen);
+  	console.log("in chart");
+
+  	console.log("selection: " + selection);
     selection.each(function(d) {
 
-      init(d);
+    	console.log("in selection");
+
+      	init(d);
 
       if(reverseLayerOrder)
         d.reverse();
@@ -199,36 +204,59 @@ function radialBarChart() {
 
       layers.exit().remove();
 
+      console.log('paths', layers.selectAll('path').length);
+
       // Segment enter/exit/update
       var segments = layers
         .selectAll('path')
         .data(function(d) {
           var m = d3.map(d.data);
-          return m.values(); 
+          return m.values();
         });
 
-      segments
-        .enter()
-        .append('path')
-        .style('fill', function(d, i) {
-          if(!barColors) return;
+      if (firstChartDrawing) {
+	      segments
+	        .enter()
+	        .append('path')
+	        .style('fill', function(d, i) {
+	          if(!barColors) return "";
 
-          //var test = chart.updateGlobal();
-          //console.log("test: " + test);
-          console.log("chosen: " + chosen);
-          if(i == chosen) {
-          	//chosen = chosen+1;
-            return "blue";
-          }
-          return barColors[i % barColors.length];
-        });
+	          //var test = chart.updateGlobal();
+	          //console.log("test: " + test);
+	          console.log("chosen: " + chosen);
+	          if(i == chosen) {
+	          	//chosen = chosen+1;
+	            return "blue";
+	          }
+	          return barColors[i % barColors.length];
+	        });
+     			segments.exit().remove();
+	        firstChartDrawing = false;
+	    } else {
 
-      segments.exit().remove();
+	      segments
+	        .selectAll('path')
+	        .style('fill', function(d, i) {
+	          if(!barColors) return "";
 
+	          //var test = chart.updateGlobal();
+	          //console.log("test: " + test);
+	          console.log("chosen: " + chosen);
+	          if(i == chosen) {
+	          	//chosen = chosen+1;
+	            return "blue";
+	          }
+	          return barColors[i % barColors.length];
+	        });
+	    }
+
+
+      
       segments
         .transition()
         .duration(transitionDuration)
         .attr('d', d3.svg.arc().innerRadius(0).outerRadius(or).startAngle(sa).endAngle(ea))
+			
 
       if(!update)
         renderOverlays(this);
