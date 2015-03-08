@@ -76,20 +76,22 @@ function map() {
 		//var temp = data;
 		//var pointArray = new google.maps.MVCArray(temp);
 
+
+
 		// CREATES THE HEATMAP LAYER
   	var heatmap = new google.maps.visualization.HeatmapLayer({
    		// CREATING COLORS FOR HEATMAP, COLORBLINDNESS!
-   		gradient: [	'rgba(125, 255, 0  , 0)',
-  		  					'rgba(115, 244, 21 , 1)', 
-    							'rgba(104, 232, 43 , 1)', 
-    							'rgba(94 , 221, 64 , 1)', 
-    							'rgba(83 , 210, 85 , 1)', 
-    							'rgba(73 , 198, 106, 1)', 
-    							'rgba(62 , 187, 128, 1)', 
-    							'rgba(52 , 176, 149, 1)', 
-    							'rgba(42 , 164, 170, 1)', 
-    							'rgba(31 , 153, 191, 1)', 
-    							'rgba(21 , 142, 212, 1)'],
+   		gradient: [	'rgba(0, 0, 255  , 0)',
+  		  					'rgba(51, 0, 255 , 5)', 
+    							'rgba(102, 0, 255 , 5)', 
+    							'rgba(154 , 0, 255 , 5)', 
+    							'rgba(203 , 0, 255 , 5)', 
+    							'rgba(255 , 0, 255, 5)', 
+    							'rgba(255 , 0, 203, 5)', 
+    							'rgba(255 , 0, 152, 5)', 
+    							'rgba(255 , 0, 102, 5)', 
+    							'rgba(255 , 0, 51, 5)', 
+    							'rgba(255 , 0, 0, 5)'],
     	// SETTING THE DATA FOR HEATMAP
     	data: data
   		});
