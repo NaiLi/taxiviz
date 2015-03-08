@@ -54,7 +54,7 @@ function radialBarChart() {
 	}
 */
   // Configurable variables
-  var margin = {top: 20, right: 20, bottom: 20, left: 20};
+  var margin = {top: 35, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
   var reverseLayerOrder = false;
   var barColors = undefined;

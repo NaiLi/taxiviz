@@ -197,26 +197,32 @@ function map() {
 
 	this.tickMap = function tickMap() {
 
-		// UGLY HACK, NO IDEA WHY IT WORKS WITH A 2 HERE
-		var hour = 2;
+		var hour = 8; // start with hour 8 (morning)
 		var day = self.day;
-		var slider;
-		slider = document.getElementById("slider");
+		var positionInClock = 18; // start with position 18 in clock
+		var count = 0; // count 24 hours
 
 		var timer = setInterval(function() {
 			
-			slider.value = hour;
-
-			if(hour > 24) {
-				slider.value = 1;
+			if(count > 23) {
 				clearInterval(timer);
 			}
+			if(hour > 23) {
+				hour = 0;
+			}
+			if(positionInClock > 23) {
+				positionInClock = 0;
+			}
 
-			var dh = self.getHourOf(day,hour);
+			var dh = self.getHourOf(day,hour); 
 			dh = createLocArray(dh, 0, dh.length-1);
 			createHeatMap(dh);
 			
-			hour = hour + 1;
+			slider.setValue(positionInClock) // Move slider position
+
+			hour++;
+			positionInClock++;
+			count++;
 
 		}, 500);
 	}

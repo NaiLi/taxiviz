@@ -5,7 +5,6 @@ function circleChart(){
 	//var file = "data/weekOne_sortedbyDateTime.csv";
 	
 	var self = this;
-	var ccDiv = $("circleChart");
 	var data;
 	var chart;
 	var chosen = 0;
@@ -64,6 +63,7 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
+
 		chart = radialBarChart()
 		.barHeight(150)
 		.reverseLayerOrder(false)
@@ -74,7 +74,9 @@ function circleChart(){
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
 
-		d3.select('#circleChart1')
+
+		//d3.select('#circleChart1')
+		d3.select('#circleChart')
 		.datum(chartDataFree)
 		.call(chart);
 	}
