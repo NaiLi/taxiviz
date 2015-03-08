@@ -23,11 +23,11 @@ function circleChart(){
 
 	function run(data) {
 	
-		console.log("data.length: " + data.length);
+		//console.log("data.length: " + data.length);
 
 		chartData = createChartData(data, "free");
 
-		console.log("chartData.length: " + chartData.length);
+		//console.log("chartData.length: " + chartData.length);
 		//draw();
 		createCircleChart(data);
 	};
@@ -62,7 +62,7 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
-		console.log("DEN HÄR SKA VA MER: ", chartData);
+		//console.log("DEN HÄR SKA VA MER: ", chartData);
 
 		chart = radialBarChart()
 		.barHeight(100)

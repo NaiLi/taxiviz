@@ -43,7 +43,7 @@ function radialBarChart() {
   chart.setChosen = function(value) {
     chart.chosen = value;
 
-    console.log("set chosen to " + chart.chosen)
+    //console.log("set chosen to " + chart.chosen)
 
   }
 /*
@@ -170,13 +170,13 @@ function radialBarChart() {
   var firstChartDrawing = true;
   function chart(selection) {
 
-  	console.log("in chart");
+  	//console.log("in chart");
 
-  	console.log("selection: " + selection);
+  	//console.log("selection: " + selection);
 
     selection.each(function(d) {
 
-    	console.log("in selection");
+    	//console.log("in selection");
 
       	init(d);
 
@@ -207,7 +207,7 @@ function radialBarChart() {
 
       layers.exit().remove();
 
-      console.log('paths', layers.selectAll('path').length);
+      //console.log('paths', layers.selectAll('path').length);
 
       // Segment enter/exit/update
       var segments = layers
@@ -243,7 +243,7 @@ function radialBarChart() {
 
 	          //var test = chart.updateGlobal();
 	          //console.log("test: " + test);
-	          console.log("chosen: " + chosen);
+	          //console.log("chosen: " + chosen);
 	          if(i == chosen) {
 	          	//chosen = chosen+1;
 	            return "blue";
@@ -261,7 +261,7 @@ function radialBarChart() {
 
 	          //var test = chart.updateGlobal();
 	          //console.log("test: " + test);
-	          console.log("chosen: " + chosen);
+	          //console.log("chosen: " + chosen);
 	          if(i == chosen) {
 	          	//chosen = chosen+1;
 	            return "blue";
