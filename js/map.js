@@ -81,17 +81,17 @@ function map() {
 		// CREATES THE HEATMAP LAYER
   	var heatmap = new google.maps.visualization.HeatmapLayer({
    		// CREATING COLORS FOR HEATMAP, COLORBLINDNESS!
-   		gradient: [	'rgba(0, 0, 255  , 0)',
-  		  					'rgba(51, 0, 255 , 5)', 
-    							'rgba(102, 0, 255 , 5)', 
-    							'rgba(154 , 0, 255 , 5)', 
-    							'rgba(203 , 0, 255 , 5)', 
-    							'rgba(255 , 0, 255, 5)', 
-    							'rgba(255 , 0, 203, 5)', 
-    							'rgba(255 , 0, 152, 5)', 
-    							'rgba(255 , 0, 102, 5)', 
-    							'rgba(255 , 0, 51, 5)', 
-    							'rgba(255 , 0, 0, 5)'],
+   		gradient: [	'rgba(0,	 0, 255, 0)',
+  		  					'rgba(51,	 0, 255, 5)', 
+    							'rgba(102, 0, 255, 5)', 
+    							'rgba(154, 0, 255, 5)', 
+    							'rgba(203, 0, 255, 5)', 
+    							'rgba(255, 0, 255, 5)', 
+    							'rgba(255, 0, 203, 5)', 
+    							'rgba(255, 0, 152, 5)', 
+    							'rgba(255, 0, 102, 5)', 
+    							'rgba(255, 0, 51,	 5)', 
+    							'rgba(255, 0, 0,	 5)'],
     	// SETTING THE DATA FOR HEATMAP
     	data: data
   		});
