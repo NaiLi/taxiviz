@@ -46,8 +46,6 @@ function circleChart(){
 		    	.call(chart);
 	 	}
 	 	//chart.setChosenPieceGlobal();
-
-
 	}
 
 	function createCircleChart(data) {

@@ -1,6 +1,7 @@
 function interaction() {
 
 	var self = this;
+	var localData = [];
 
 	var file = "data/reducedTable_sortedbyDateTime.csv";
 
@@ -36,7 +37,7 @@ function interaction() {
 	    	if(hourData) {
 	    		//console.log("value " + num + " : " + hourData.length);
 	    	}
-			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
+			map.createHeatMapGlobal(createLocArray(localData[num], 0, hourData.length-1));
 			circleChart.updateGlobal(value);
 			num = (num<10) ? "0" + num : num;
 			num = num + ":00";
@@ -68,6 +69,14 @@ function interaction() {
 
 	function run(data) {
 		self.day = data;//map.getOneDay(data, new Date("2013-03-04"));
+
+		// SAVES THE DATA TO BE STORED 
+		for(var i=0; i<24; i++) {
+			var temp  = map.getHourOf(self.day, i);
+			localData.push(temp);
+		};
+
+		console.log("in interaction localData: ",localData);
 	}
 	
 	/*

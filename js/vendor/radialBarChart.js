@@ -39,7 +39,7 @@ function radialBarChart() {
 	}
 
 	// CREATEING VARIABLE FOR CHOSEN PIECE
-	var chosen = 0;
+	var chosen = 18;
   chart.setChosen = function(value) {
     chart.chosen = value;
     chosen = value;
@@ -47,19 +47,7 @@ function radialBarChart() {
     //console.log("set chosen to " + chart.chosen)
 
   }
-/*
-	// GLOBAL FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
-	this.setChosenPieceGlobal = function() {
-		consfole.log("in setChosenPieceGlobal");
-		setChosenPiece();
-	}
-  
-	// FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
-	function setChosenPiece() {
-    console.log("in setChosenPiece");
-		chosen = 6;
-	}
-*/
+
   // Configurable variables
   var margin = {top: 40, right: 20, bottom: 20, left: 20};
   var barHeight = 100;

@@ -42,7 +42,7 @@ function map() {
 
 		console.log(localData);
 
-		draw(localData[0]);
+		draw(localData[18]);
 
 	}
 
@@ -69,7 +69,7 @@ function map() {
 			// ROADMAP	Displays a normal, default 2D map 
 			// SATELLITE	Displays a photographic map
 			// TERRAIN Displays a map with mountains, rivers, etc.
-			mapTypeId: google.maps.MapTypeId.SATELLITE,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			// SETS LEVEL OF ZOOM
 		  zoom: 11,
 		  // CENTERS STHML
@@ -205,7 +205,7 @@ function map() {
 
 			obj = {
 				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
-				weight: (data[i]["weight"])/1};
+				weight: ((data[i]["weight"])/100)};
 
 			temp.push(obj);
 		}
@@ -233,7 +233,7 @@ function map() {
 			}
 
 			var dh = localData[hour]; //self.getHourOf(day,hour); 
-			console.log("localData[hour]: ",localData[hour]);
+			console.log("hour: ", hour);
 			dh = createLocArray(dh, 0, dh.length-1);
 			createHeatMap(dh);
 			
@@ -263,6 +263,7 @@ function map() {
 		return temp;
 	}
 */
+
 	//collects all sub data of one hour from data consisting of only one day
 	this.getHourOf = function getHourOf(dayData, hour) {
 
