@@ -12,6 +12,8 @@ function map() {
 	var prevHeatmap;
 	var currHeatmap;
 
+	var localData = [];
+
 	// READING THE DATA
 	d3.csv(file, function(error, data) {
 		self.data = data;
@@ -25,10 +27,23 @@ function map() {
 		initializeMap();
 		// EXTRAXTS ONE DAY TO DRAW
 		self.day = data;//self.getOneDay(data, new Date("2013-03-04")); 
-		console.log("length of day: " + self.getOneDay(data,new Date("2013-03-04")).length); 
-		console.log("length of big: " + self.day.length)
-		var hour = self.getHourOf(self.day,8);
-		draw(hour);
+		//console.log("length of day: " + self.getOneDay(data,new Date("2013-03-04")).length); 
+		//console.log("length of big: " + self.day.length)
+		//var hour = self.getHourOf(self.day,8);
+		//draw(localData[0]);
+
+		// SAVES THE DATA TO BE STORED 
+		for(var i=0; i<24; i++) {
+			var temp  = self.getHourOf(self.day, i);
+			//console.log("i: ", i);
+			//console.log("self.day", self.day);
+			localData.push(temp);
+		};
+
+		console.log(localData);
+
+		draw(localData[0]);
+
 	}
 
 	// FUNCTION TO CALL EVERYTHING THAT SHOULD BE DRAWN ON MAP
@@ -190,7 +205,7 @@ function map() {
 
 			obj = {
 				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
-				weight: (data[i]["weight"])/100};
+				weight: (data[i]["weight"])/1};
 
 			temp.push(obj);
 		}
@@ -201,7 +216,7 @@ function map() {
 	this.tickMap = function tickMap() {
 
 		var hour = 8; // start with hour 8 (morning)
-		var day = self.day;
+		//var day = self.day;
 		var positionInClock = 18; // start with position 18 in clock
 		var count = 0; // count 24 hours
 
@@ -217,11 +232,12 @@ function map() {
 				positionInClock = 0;
 			}
 
-			var dh = self.getHourOf(day,hour); 
+			var dh = localData[hour]; //self.getHourOf(day,hour); 
+			console.log("localData[hour]: ",localData[hour]);
 			dh = createLocArray(dh, 0, dh.length-1);
 			createHeatMap(dh);
 			
-			slider.setValue(positionInClock) // Move slider position
+			//slider.setValue(positionInClock) // Move slider position
 
 			hour++;
 			positionInClock++;
@@ -230,6 +246,7 @@ function map() {
 		}, 500);
 	}
 
+/*
 	//collects all sub data of one date. Not depending on sorting. 
 	this.getOneDay = function getOneDay(data, searchDate) {
 
@@ -245,7 +262,7 @@ function map() {
 		}
 		return temp;
 	}
-
+*/
 	//collects all sub data of one hour from data consisting of only one day
 	this.getHourOf = function getHourOf(dayData, hour) {
 
