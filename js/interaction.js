@@ -8,13 +8,13 @@ function interaction() {
 	//var slider_hor = $("#slider_hor");
 
 
-	var slider = $('#slider').CircularSlider({
+	slider = $('#slider').CircularSlider({
 	    radius: 125,
 	    innerCircleRatio: '0.5',
 	    handleDist: 100,
 	    min: 0,
 	    max: 23,
-	    value: 0,
+	    value: 18,
 	    clockwise: true,
 	    labelSuffix: "",
 	    labelPrefix: "",
@@ -30,7 +30,6 @@ function interaction() {
 			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
 			num = (num<10) ? "0" + num : num;
 			num = num + ":00";
-			console.log(num)
 	    	return null;
 	    	//return value;
 	    }
@@ -75,7 +74,13 @@ function interaction() {
 		var hourData = map.getHourOf(self.day, num);
 
 		map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
+
+		
+		circleChart.updateGlobal(num);
+
+
 	});*/
+
 
 	function createLocArray(data, from, to) {
 

@@ -6,6 +6,8 @@ function circleChart(){
 	
 	var self = this;
 	var data;
+	var chart;
+	var chosen = 0;
 
 	var hired;
 	var lineData = [];
@@ -26,7 +28,32 @@ function circleChart(){
 		createCircleChart(data);
 	};
 
+	this.updateGlobal = function(hour) {
+		console.log("in updateGlobal");
+		update(hour);
+		return 7;
+	}
+
+	function update(hour) {
+  //initData();
+ 	console.log("in update");
+
+ 	//chart.setChosenPiece(5);
+ 	var test = chart.chosen;
+
+ 	console.log("test: " + test);
+
+ 	//chart.setChosenPieceGlobal();
+
+
+  d3.select('#chart')
+    .datum(data)
+    .call(chart);
+}
+
 	function createCircleChart(data) {
+
+		console.log("HIT KOMMER JAG");
 
 		//TESTING TO CREATE COLORS
 		var colors = [];
@@ -38,7 +65,8 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
-		var chart = radialBarChart()
+
+		chart = radialBarChart()
 		.barHeight(100)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
@@ -47,6 +75,9 @@ function circleChart(){
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
+
+
+		//d3.select('#circleChart1')
 		d3.select('#circleChart')
 		.datum(chartDataFree)
 		.call(chart);

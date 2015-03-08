@@ -1,22 +1,58 @@
+/********************************************************************************
+* Copyright (c) 2013 Peter Cook 																								*
+*																																								*
+* Permission is hereby granted, free of charge, to any person obtaining a copy 	*
+* of this software and associated documentation files (the "Software"), to deal *
+* in the Software without restriction, including without limitation the rights 	*
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 		*
+* copies of the Software, and to permit persons to whom the Software is 				*
+* furnished to do so, subject to the following conditions: 											*
+* 																																							*
+* The above copyright notice and this permission notice shall be included in 		*
+* all copies or substantial portions of the Software. 													*
+*																																								*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 		*
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 			*
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 	*
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 				*
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, *
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN 		*
+* THE SOFTWARE. 																																*
+********************************************************************************/
+
 function radialBarChart() {
 
-  // Creating array with labels
-  var hours = [];
-  var h1 = 14;
-  var h2 = 0;
-  for(var i=0; i<24; i++) {
-    
-    if(i<10) {
-      hours.push(h1<10 ? "0" + h1.toString() : h1.toString());
-      //t<10 ? "0"+ t : t
-      h1 = h1 +1;
-    }
-    else {
-      hours.push(h2<10 ? "0" + h2.toString() : h2.toString());
-      h2 = h2 + 1;
-    }
-  }
+	// CREATEING THE ARRAY WITH LABELS
+	var hours = [];
+	var h1 = 14;
+	var h2 = 0;
+	for(var i=0; i<24; i++) {
 
+		if(i<10) {
+			hours.push(h1<10 ? "0" + h1.toString() : h1.toString());
+			h1 = h1 +1;
+		}
+		else {
+			hours.push(h2<10 ? "0" + h2.toString() : h2.toString());
+			h2 = h2 + 1;
+		}
+	}
+
+	// CREATEING VARIABLE FOR CHOSEN PIECE
+	var chosen = 3;
+/*
+	// GLOBAL FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
+	this.setChosenPieceGlobal = function() {
+		consfole.log("in setChosenPieceGlobal");
+		setChosenPiece();
+	}
+  
+	// FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
+	function setChosenPiece() {
+    console.log("in setChosenPiece");
+		chosen = 6;
+	}
+*/
   // Configurable variables
   var margin = {top: 35, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
@@ -116,7 +152,8 @@ function radialBarChart() {
       .enter()
       .append('text')
       .style('text-anchor', 'middle')
-      .style('fill', function(d, i) {return colorLabels ? barColors[i % barColors.length] : null;})
+      .style('fill', function(d, i) {
+        return colorLabels ? barColors[i % barColors.length] : null;})
       .append('textPath')
       .attr('xlink:href', '#label-path')
       // changes where texts is anchored
@@ -125,6 +162,7 @@ function radialBarChart() {
   }
 
   function chart(selection) {
+    console.log("HÄR ÄR JAG" + chosen);
     selection.each(function(d) {
 
       init(d);
@@ -169,6 +207,14 @@ function radialBarChart() {
         .append('path')
         .style('fill', function(d, i) {
           if(!barColors) return;
+
+          //var test = chart.updateGlobal();
+          //console.log("test: " + test);
+          console.log("chosen: " + chosen);
+          if(i == chosen) {
+          	//chosen = chosen+1;
+            return "blue";
+          }
           return barColors[i % barColors.length];
         });
 
