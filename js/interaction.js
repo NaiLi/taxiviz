@@ -7,6 +7,12 @@ function interaction() {
 	var div = $("#interaction");
 	//var slider_hor = $("#slider_hor");
 
+    var margin = [30, 10, 10, 10],
+        width = div.width();// - margin[1] - margin[3],
+        height = div.height();// - margin[0] - margin[2];
+
+	var data;
+	var day;
 
 	slider = $('#slider').CircularSlider({
 	    radius: 125,
@@ -26,7 +32,10 @@ function interaction() {
 	    formLabel: function(value) {
 
 	    	var num = (value+14)%24;
-			var hourData = map.getHourOf(self.day, value);
+			var hourData = map.getHourOf(self.day, num);
+	    	if(hourData) {
+	    		console.log("value " + num + " : " + hourData.length);
+	    	}
 			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
 			circleChart.updateGlobal(value);
 			num = (num<10) ? "0" + num : num;
@@ -35,13 +44,6 @@ function interaction() {
 	    	//return value;
 	    }
 	});
-
-    var margin = [30, 10, 10, 10],
-        width = div.width();// - margin[1] - margin[3],
-        height = div.height();// - margin[0] - margin[2];
-
-	var data;
-	var day;
 
 /*
 	var weekScale = d3.scale.linear()
@@ -54,9 +56,9 @@ function interaction() {
 		.orient("bottom");
 */
 
-	var day = d3.select("#dayChart");
+	var dayDiv = d3.select("#dayChart");
 	
-	day.append("div")
+	dayDiv.append("div")
 		.attr("id", "circleChart");
 
 	d3.csv(file, function(data) {
@@ -65,7 +67,7 @@ function interaction() {
 	});
 
 	function run(data) {
-		self.day = map.getOneDay(data, new Date("2013-03-04"));
+		self.day = data;//map.getOneDay(data, new Date("2013-03-04"));
 	}
 	
 	/*
@@ -90,7 +92,7 @@ function interaction() {
 		for(i=from; i<to; ++i) {
 			obj = {
 				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
-				weight: (data[i]["weight"]/3)
+				weight: (data[i]["weight"])/100
 			}
 			temp.push(obj);
 		}

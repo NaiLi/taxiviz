@@ -42,8 +42,6 @@ function radialBarChart() {
 	var chosen = 3;
   chart.setChosen = function(value) {
     chart.chosen = value;
-
-    console.log("set chosen " + chart.chosen)
   }
 /*
 	// GLOBAL FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
@@ -59,7 +57,7 @@ function radialBarChart() {
 	}
 */
   // Configurable variables
-  var margin = {top: 35, right: 20, bottom: 20, left: 20};
+  var margin = {top: 40, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
   var reverseLayerOrder = false;
   var barColors = undefined;
@@ -167,7 +165,7 @@ function radialBarChart() {
   }
 
   function chart(selection) {
-    console.log("HÄR ÄR JAG" + chosen);
+
     selection.each(function(d) {
 
       init(d);
@@ -215,7 +213,6 @@ function radialBarChart() {
 
           //var test = chart.updateGlobal();
           //console.log("test: " + test);
-          console.log("chosen: " + chosen);
           if(i == chosen) {
           	//chosen = chosen+1;
             return "blue";

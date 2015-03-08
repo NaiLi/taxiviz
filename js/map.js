@@ -24,9 +24,10 @@ function map() {
 		// Creates the map
 		initializeMap();
 		// EXTRAXTS ONE DAY TO DRAW
-		self.day = self.getOneDay(data, new Date("2013-03-04")); 
-		var hour = self.getHourOf(self.day,0);
-
+		self.day = data;//self.getOneDay(data, new Date("2013-03-04")); 
+		console.log("length of day: " + self.getOneDay(data,new Date("2013-03-04")).length); 
+		console.log("length of big: " + self.day.length)
+		var hour = self.getHourOf(self.day,8);
 		draw(hour);
 	}
 
@@ -94,6 +95,7 @@ function map() {
     							'rgba(255 , 0, 0, 5)'],
     	// SETTING THE DATA FOR HEATMAP
     	data: data
+    	//radius: 20
   		});
 
   		// LAYERS THE HEATMAP ON THE MAP
@@ -184,12 +186,11 @@ function map() {
 	function createLocArray(data, from, to) {
 
 		var temp = [];
-
 		for(i=from; i<to; ++i) {
 
 			obj = {
 				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
-				weight: (data[i]["weight"]/4) };
+				weight: (data[i]["weight"])/100};
 
 			temp.push(obj);
 		}
