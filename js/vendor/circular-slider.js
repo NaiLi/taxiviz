@@ -662,7 +662,6 @@ SOFTWARE.
         if (!settings.selectable) jcsPanel.addClass('noselect');
 
         // default position
-        console.log("settings.value " + settings.value);
         setValue(settings.value || settings.min);
 
         return $.extend({}, this, {

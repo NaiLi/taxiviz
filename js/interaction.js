@@ -28,6 +28,7 @@ function interaction() {
 	    	var num = (value+14)%24;
 			var hourData = map.getHourOf(self.day, value);
 			map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
+			circleChart.updateGlobal(value);
 			num = (num<10) ? "0" + num : num;
 			num = num + ":00";
 	    	return null;
