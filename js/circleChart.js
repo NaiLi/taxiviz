@@ -29,27 +29,22 @@ function circleChart(){
 	};
 
 	this.updateGlobal = function(hour) {
-		console.log("in updateGlobal");
 		update(hour);
-		return 7;
 	}
 
 	function update(hour) {
-  //initData();
- 	console.log("in update");
+	  //initData();
+	 	if(chart!=undefined) {
+	 		chart.setChosen(hour);
+		
+		  	d3.select('#chart')
+		    	.datum(data)
+		    	.call(chart);
+	 	}
+	 	//chart.setChosenPieceGlobal();
 
- 	//chart.setChosenPiece(5);
- 	var test = chart.chosen;
 
- 	console.log("test: " + test);
-
- 	//chart.setChosenPieceGlobal();
-
-
-  d3.select('#chart')
-    .datum(data)
-    .call(chart);
-}
+	}
 
 	function createCircleChart(data) {
 
@@ -74,8 +69,6 @@ function circleChart(){
 		.domain([0,100])
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
-
-
 
 		//d3.select('#circleChart1')
 		d3.select('#circleChart')
