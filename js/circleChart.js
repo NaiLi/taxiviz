@@ -65,7 +65,7 @@ function circleChart(){
 
 
 		chart = radialBarChart()
-		.barHeight(150)
+		.barHeight(100)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
 		.barColors(createColors())
