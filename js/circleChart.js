@@ -53,6 +53,8 @@ function circleChart(){
 
 	function createCircleChart(data) {
 
+		console.log("HIT KOMMER JAG");
+
 		//TESTING TO CREATE COLORS
 		var colors = [];
 		colors.push("red");
