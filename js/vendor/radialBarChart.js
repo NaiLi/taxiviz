@@ -44,6 +44,7 @@ function radialBarChart() {
     chart.chosen = value;
 
     console.log("set chosen to " + chart.chosen)
+
   }
 /*
 	// GLOBAL FUNCTION TO CALL WHEN CHANGING THE CHOSEN PIECE
@@ -59,7 +60,7 @@ function radialBarChart() {
 	}
 */
   // Configurable variables
-  var margin = {top: 35, right: 20, bottom: 20, left: 20};
+  var margin = {top: 40, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
   var reverseLayerOrder = false;
   var barColors = undefined;
@@ -168,9 +169,11 @@ function radialBarChart() {
 
   var firstChartDrawing = true;
   function chart(selection) {
+
   	console.log("in chart");
 
   	console.log("selection: " + selection);
+
     selection.each(function(d) {
 
     	console.log("in selection");
@@ -211,7 +214,24 @@ function radialBarChart() {
         .selectAll('path')
         .data(function(d) {
           var m = d3.map(d.data);
-          return m.values();
+
+          return m.values(); 
+        });
+
+      segments
+        .enter()
+        .append('path')
+        .style('fill', function(d, i) {
+          if(!barColors) return;
+
+          //var test = chart.updateGlobal();
+          //console.log("test: " + test);
+          if(i == chosen) {
+          	//chosen = chosen+1;
+            return "blue";
+          }
+          return barColors[i % barColors.length];
+
         });
 
       if (firstChartDrawing) {
