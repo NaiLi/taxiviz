@@ -3,44 +3,19 @@ function map() {
 	var self = this;
 
 	// Global variables
-	var file = "data/reducedTable_sortedbyDateTime.csv";
-	var data;
-	var day;
 	var map;
-	var tickCounter;
-	var part;
 	var prevHeatmap;
 	var currHeatmap;
 
-	var localData = [];
-
-	// READING THE DATA
-	d3.csv(file, function(error, data) {
-		self.data = data;
-		run(data);
-	});
-
 	// FIRST THING THAT HAPPENS
-	function run(data) {
+	self.run = function run(){//data) {
+
 
 		// Creates the map
 		initializeMap();
-		// EXTRAXTS ONE DAY TO DRAW
-		self.day = data;//self.getOneDay(data, new Date("2013-03-04")); 
-		//var hour = self.getHourOf(self.day,8);
-		//draw(localData[0]);
 
-		// SAVES THE DATA TO BE STORED 
-		for(var i=0; i<24; i++) {
-			var temp  = self.getHourOf(self.day, i);
-			//console.log("i: ", i);
-			//console.log("self.day", self.day);
-			localData.push(temp);
-		};
-
-		//console.log(localData);
-
-		draw(localData[18]);
+		//Draw day one
+		draw(localData[8]);
 
 	}
 
@@ -116,7 +91,6 @@ function map() {
 		} else {
 			self.currHeatmap = heatmap;
 		}
-  		//return heatmap;
 	}
 
 
@@ -197,7 +171,7 @@ function map() {
 
 			obj = {
 				location: new google.maps.LatLng(data[i]["y_coord"], data[i]["x_coord"]),
-				weight: ((data[i]["weight"])/100)};
+				weight: ((data[i]["weight"])/2)};
 
 			temp.push(obj);
 		}
@@ -236,7 +210,7 @@ function map() {
 		}, 1000);
 	}
 
-/*
+
 	//collects all sub data of one date. Not depending on sorting. 
 	this.getOneDay = function getOneDay(data, searchDate) {
 
@@ -252,7 +226,7 @@ function map() {
 		}
 		return temp;
 	}
-*/
+
 
 	//collects all sub data of one hour from data consisting of only one day
 	this.getHourOf = function getHourOf(dayData, hour) {

@@ -1,8 +1,4 @@
 function circleChart(){
-	//console.log("in function circleChart");
-
-	var file = "data/reducedTable_sortedbyDateTime.csv";
-	//var file = "data/weekOne_sortedbyDateTime.csv";
 	
 	var self = this;
 	var data;
@@ -14,21 +10,10 @@ function circleChart(){
 	var lineData = [];
 	var week = [];
 
-	d3.csv(file, function(error, data) {
-
-		run(data);
-
-	});
-
-
-	function run(data) {
+	this.run = function run(data) {
 	
-		//console.log("data.length: " + data.length);
-
 		chartData = createChartData(data, "free");
 
-		//console.log("chartData.length: " + chartData.length);
-		//draw();
 		createCircleChart(data);
 	};
 
@@ -37,7 +22,6 @@ function circleChart(){
 	}
 
 	function update(hour) {
-	  //initData();
 	 	if(chart!=undefined) {
 	 		chart.setChosen(hour);
 		
@@ -45,7 +29,6 @@ function circleChart(){
 		    	.datum(chartData)
 		    	.call(chart);
 	 	}
-	 	//chart.setChosenPieceGlobal();
 	}
 
 	function createCircleChart(data) {
@@ -60,8 +43,6 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
-		//console.log("DEN HÄR SKA VA MER: ", chartData);
-
 		chart = radialBarChart()
 		.barHeight(100)
 		.reverseLayerOrder(false)
@@ -71,7 +52,6 @@ function circleChart(){
 		.tickValues([30,60,90])
 		.tickCircleValues([10,20,30,40,50,60,70,80,90]);
 
-		//d3.select('#circleChart1')
 		d3.select('#circleChart')
 		.datum(chartDataFree)
 		.call(chart);
