@@ -6,7 +6,6 @@ function interaction() {
 	var file = "data/reducedTable_sortedbyDateTime.csv";
 
 	var div = $("#interaction");
-	//var slider_hor = $("#slider_hor");
 
     var margin = [30, 10, 10, 10],
         width = div.width();// - margin[1] - margin[3],
@@ -35,7 +34,6 @@ function interaction() {
 	    	var num = (value+14)%24;
 			var hourData = map.getHourOf(self.day, num);
 	    	if(hourData) {
-	    		//console.log("value " + num + " : " + hourData.length);
 	    	}
 			map.createHeatMapGlobal(createLocArray(localData[num], 0, hourData.length-1));
 			circleChart.updateGlobal(value);
@@ -45,17 +43,6 @@ function interaction() {
 	    	//return value;
 	    }
 	});
-
-/*
-	var weekScale = d3.scale.linear()
-		.domain([1,24])
-		.range([1,width]);
-
-	var weekAxis = d3.svg.axis()
-		.scale(weekScale)
-		.ticks(24)
-		.orient("bottom");
-*/
 
 	var dayDiv = d3.select("#dayChart");
 	
@@ -75,24 +62,7 @@ function interaction() {
 			var temp  = map.getHourOf(self.day, i);
 			localData.push(temp);
 		};
-
-		console.log("in interaction localData: ",localData);
 	}
-	
-	/*
-	var slide = d3.select("#slider_hor").on("input", function() {
-
-		num = this.value;
-		var hourData = map.getHourOf(self.day, num);
-
-		map.createHeatMapGlobal(createLocArray(hourData, 0, hourData.length-1));
-
-		
-		circleChart.updateGlobal(num);
-
-
-	});*/
-
 
 	function createLocArray(data, from, to) {
 

@@ -27,8 +27,6 @@ function map() {
 		initializeMap();
 		// EXTRAXTS ONE DAY TO DRAW
 		self.day = data;//self.getOneDay(data, new Date("2013-03-04")); 
-		//console.log("length of day: " + self.getOneDay(data,new Date("2013-03-04")).length); 
-		//console.log("length of big: " + self.day.length)
 		//var hour = self.getHourOf(self.day,8);
 		//draw(localData[0]);
 
@@ -40,7 +38,7 @@ function map() {
 			localData.push(temp);
 		};
 
-		console.log(localData);
+		//console.log(localData);
 
 		draw(localData[18]);
 
@@ -88,30 +86,24 @@ function map() {
 	// FUNCTION THAT CREATES THE HEATMAP
 	function createHeatMap(data) {
 
-
-		//var temp = data;
-		//var pointArray = new google.maps.MVCArray(temp);
-
-
-
 		// CREATES THE HEATMAP LAYER
-  	var heatmap = new google.maps.visualization.HeatmapLayer({
-   		// CREATING COLORS FOR HEATMAP, COLORBLINDNESS!
-   		gradient: [	'rgba(0,	 0, 255, 0)',
-  		  					'rgba(51,	 0, 255, 5)', 
-    							'rgba(102, 0, 255, 5)', 
-    							'rgba(154, 0, 255, 5)', 
-    							'rgba(203, 0, 255, 5)', 
-    							'rgba(255, 0, 255, 5)', 
-    							'rgba(255, 0, 203, 5)', 
-    							'rgba(255, 0, 152, 5)', 
-    							'rgba(255, 0, 102, 5)', 
-    							'rgba(255, 0, 51,	 5)', 
-    							'rgba(255, 0, 0,	 5)'],
-    	// SETTING THE DATA FOR HEATMAP
-    	data: data
-    	//radius: 20
-  		});
+	  	var heatmap = new google.maps.visualization.HeatmapLayer({
+	   		// CREATING COLORS FOR HEATMAP, COLORBLINDNESS!
+	   		gradient: [	'rgba(0,	 0, 255, 0)',
+	  		  					'rgba(51,	 0, 255, 5)', 
+	    							'rgba(102, 0, 255, 5)', 
+	    							'rgba(154, 0, 255, 5)', 
+	    							'rgba(203, 0, 255, 5)', 
+	    							'rgba(255, 0, 255, 5)', 
+	    							'rgba(255, 0, 203, 5)', 
+	    							'rgba(255, 0, 152, 5)', 
+	    							'rgba(255, 0, 102, 5)', 
+	    							'rgba(255, 0, 51,	 5)', 
+	    							'rgba(255, 0, 0,	 5)'],
+	    	// SETTING THE DATA FOR HEATMAP
+	    	data: data
+	    	//radius: 20
+	  		});
 
   		// LAYERS THE HEATMAP ON THE MAP
   		heatmap.setMap(map);
@@ -216,7 +208,6 @@ function map() {
 	this.tickMap = function tickMap() {
 
 		var hour = 8; // start with hour 8 (morning)
-		//var day = self.day;
 		var positionInClock = 18; // start with position 18 in clock
 		var count = 0; // count 24 hours
 
@@ -232,18 +223,17 @@ function map() {
 				positionInClock = 0;
 			}
 
-			var dh = localData[hour]; //self.getHourOf(day,hour); 
-			console.log("hour: ", hour);
+			var dh = localData[hour];
 			dh = createLocArray(dh, 0, dh.length-1);
 			createHeatMap(dh);
 			
-			//slider.setValue(positionInClock) // Move slider position
+			slider.setValue(positionInClock) // Move slider position
 
 			hour++;
 			positionInClock++;
 			count++;
 
-		}, 500);
+		}, 1000);
 	}
 
 /*
