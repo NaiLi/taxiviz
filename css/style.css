@@ -5,10 +5,12 @@ body {
 }
 
 #container {
+	border: dashed;
 
 	width: 100%;
-	float: left;
+	height: 100vh;
 
+	float: top;
 }
 
 h1 {	
@@ -23,23 +25,36 @@ p {
 	text-align: center;
 }
 
-
-
 #leftSide {
+		border: solid;
+		border-color: red;
 
-
-    width: 49%;
-    float: left;
-
+    width: 49.5%;
     margin: 0 auto;
+    float: left;
+    
 
 }
-
 #header {
+	border:solid;
+	border-color: blue;
 
-
+	height: 20vh;
 	float: top;
+}
 
+#dayChart {
+	border: solid;
+	border-color: green;
+
+	width: 90%;
+	height: 50vh;
+	margin: 0 auto;
+	position: relative;
+
+	text-align: center;
+	
+	float: top;
 }
 
 #circleChart1 {
@@ -56,17 +71,21 @@ p {
 }
 
 #rightSide {
+	border: solid;
+	border-color: green;	
 
-
-    width: 49%;
-    float: right;
+  width: 49.5%;
+  margin: 0 auto;
+  float: right;
 }
 
 #interaction {
+	border:solid;
+	border-color: red;
 
 
 	width: 100%;
-	height: 50px;
+	height: 10vh;
 
 	overflow: hidden;
 }
@@ -93,19 +112,14 @@ p {
 	color: white;
 }
 
-#dayChart {
 
-	position: relative;
-	width: 300px;
-	height: 300px;
-	text-align: center;
-	
-	float: right;
-}
 
 #map {
+	border: solid;
+	border-color: blue;
+
 	width: 100%;
-	height: 400px;
+	height: 60vh;
 	float: bottom;
 }
 

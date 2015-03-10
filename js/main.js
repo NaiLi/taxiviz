@@ -12,7 +12,7 @@ d3.csv(file, function(data) {
 	//use to get entire data set:
 	//self.data = data;
 	//use if we want only one day:
-	self.data = map.getOneDay(data, new Date("2013-03-12"));
+	self.data = map.getOneDay(data, new Date("2013-03-02"));
 
 	for(var i=0; i<24; i++) {
 		var temp  = map.getHourOf(self.data, i);

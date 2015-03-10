@@ -2,8 +2,10 @@ function interaction() {
 
 	var data;
 
+	var h = document.getElementById('dayChart').clientHeight;
+
 	slider = $('#slider').CircularSlider({
-	    radius: 125,
+	    radius: (h/2.2),
 	    innerCircleRatio: '0.5',
 	    handleDist: 100,
 	    min: 0,
