@@ -2,6 +2,8 @@ function meanDist() {
 	/*Calculate mean distance of a hired route
 	 *Data argument should be sorted by time first*/
 
+   var oneDist;
+
   this.run = function(data) {
 
     var done = false;
@@ -10,14 +12,27 @@ function meanDist() {
     var endPoint;
 
     //Find random car
-    var rand = Math.floor(Math.random()*data.length);
+    //var rand = Math.floor(Math.random()*data.length);
 
-    getStartAndEnd(data, rand);
+    //getStartAndEnd(data, rand);
+
+    getSeveralDistances(data);
 
   }
 
+  function getSeveralDistances(data) {
+
+    var distances = [];
+    for(i=0; i<3; i++) {
+      var rand = Math.floor(Math.random()*data.length);
+      var dist = getDistanceOfIndexCar(data, rand);
+      console.log(dist)
+
+    }
+  }
+
   //TODO border cases!
-  function getStartAndEnd(data, i) {
+  function getDistanceOfIndexCar(data, i) {
     var car = data[i];
     console.log(car["hired"])
     //if we start at hired, search for false first:
@@ -47,10 +62,10 @@ function meanDist() {
 
     endPoint = temp;
 
-    console.log("the car " + startPoint["id"] + "(" + endPoint["id"] + ") has gone from ");
-    console.log(startPoint["hired"] + " to " + endPoint["hired"] + " (not " + car["hired"] + ")")
+    //console.log("the car " + startPoint["id"] + "(" + endPoint["id"] + ") has gone from ");
+    //console.log(startPoint["hired"] + " to " + endPoint["hired"] + " (not " + car["hired"] + ")")
 
-    calcDist(startPoint, endPoint);
+    return calcDist(startPoint, endPoint);
   }
 
   //Calculate distance between start and end point
@@ -61,7 +76,7 @@ function meanDist() {
 
     var origin = start["y_coord"] + "," + start["x_coord"];
     var destination = end["y_coord"] + "," + end["x_coord"];
-  
+
     //fågeldistans
     //var dist = google.maps.geometry.spherical.computeDistanceBetween (a, b);
     //console.log(dist)
@@ -81,42 +96,16 @@ function meanDist() {
 
     function callback(response, status) {
       if (status == google.maps.DistanceMatrixStatus.OK) {
-      console.log("in callback " + response.originAddresses)
+      //console.log("in callback " + response.originAddresses)
 
       var distance = response.rows[0].elements[0].distance.text;
+      this.oneDist = distance;
       console.log("distance: " + distance);
       // See Parsing the Results for
       // the basics of a callback function.
+      }
     }
-    }
-
+    console.log("in cald " + this.oneDist)
+    return this.oneDist; 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
