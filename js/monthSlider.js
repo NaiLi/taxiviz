@@ -31,6 +31,7 @@ function monthSlider() {
             .step(1)
             .value(1)
         .on("slide", function(evt, value) {
+
 	 		var num = value;
  			value = (value<10) ? "0" + value : value;
  			var d = "2013-03-" + value;

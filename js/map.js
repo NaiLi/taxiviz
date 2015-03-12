@@ -6,18 +6,15 @@ function map() {
 	var map;
 	var prevHeatmap;
 	var currHeatmap;
-	var timer;
 
 	// FIRST THING THAT HAPPENS
-	self.run = function run(){//data) {
-
+	self.run = function run(){
 
 		// Creates the map
 		initializeMap();
 
-		//Draw day one
+		//Draw day one (1 of March, 08:00)
 		draw(localData[8]);
-
 	}
 
 	// FUNCTION TO CALL EVERYTHING THAT SHOULD BE DRAWN ON MAP
@@ -78,7 +75,6 @@ function map() {
 	    							'rgba(255, 0, 0,	 5)'],
 	    	// SETTING THE DATA FOR HEATMAP
 	    	data: data
-	    	//radius: 20
 	  		});
 
   		// LAYERS THE HEATMAP ON THE MAP
@@ -186,7 +182,7 @@ function map() {
 		var positionInClock = 18; // start with position 18 in clock
 		var count = 0; // count 24 hours
 
-		this.timer = setInterval(function() {
+		var timer = setInterval(function() {
 			
 			if(count > 23) {
 				clearInterval(timer);
