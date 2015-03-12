@@ -6,6 +6,7 @@ function map() {
 	var map;
 	var prevHeatmap;
 	var currHeatmap;
+	var timer;
 
 	// FIRST THING THAT HAPPENS
 	self.run = function run(){//data) {
@@ -185,7 +186,7 @@ function map() {
 		var positionInClock = 18; // start with position 18 in clock
 		var count = 0; // count 24 hours
 
-		var timer = setInterval(function() {
+		this.timer = setInterval(function() {
 			
 			if(count > 23) {
 				clearInterval(timer);

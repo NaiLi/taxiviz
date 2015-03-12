@@ -13,69 +13,69 @@
 		<link rel="stylesheet" href="css/circleChart.css">
 		<link rel="stylesheet" href="css/circular-slider.css">
 		<link rel="stylesheet" href="css/d3.slider.css">
-		<link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">
-
-
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="stylesheet" href="css/font-awesome-4.3.0/css/font-awesome.min.css">		
 	</head>
 	<body>
 
 <!--
-			<iframe id="map" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=59.3293%2C18.0686&key=AIzaSyDgnzAjf7Bb5xCRdUUcdS_1R2s1TN-EEko"></iframe>
+	<iframe id="map" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=10&center=59.3293%2C18.0686&key=AIzaSyDgnzAjf7Bb5xCRdUUcdS_1R2s1TN-EEko"></iframe>
 -->
 		<div id="container" class="row">
 			<div id="leftSide" class="left">
 				<div id="header">
-					<h1> 
+					<<h1> 
 						<i class="fa fa-taxi"></i>
-						Taxivis
+							Taxivis
 						<i class="fa fa-taxi"></i>
 					</h1>
-					<p> Visualization of taxis in Stockholm </p>
+					<h2> 
+						Visualization of taxis in Stockholm 
+					</h2>
 				</div>
-
-				</br>
-				<p id="time"></p>
-				<div id="circleChart1">	
-					<div id="test">
-						<p>	Choose an hour of the day </br>
-								with the slider. </br>
-								</br>
-								The circle bar chart shows the </br>
-								percentage of the available taxis </br>
-								at every hour. </br>
-								</br>
-								The map to the right shows a </br>
-								map of where the cars are at </br>
-								the specified hour.</br>
-						</p>
+				<div id="dayChart">		
+					<div id="circleChart1">				
+						<!--<div id="slider"></div>-->
 					</div>
-					<div id="dayChart">
-						<div id="slider"></div>
-					</div>
-					
 				</div>
-
-				
-			</div>
-
-			<div id="rightSide">
 				<div id="interaction">
-					<input type="button" value="Tick" onclick="map.tickMap();"/>
-					<p> Press this button to let clock tick along. </p>
-					<!--
-					<input type="range" min="1" max="24" id="slider" step="1" style="width:100%" value="1" list="steps">-->
+						<input type="button" value="Timelapse" onclick="map.tickMap();"/>
 				</div>
+<!--			
+	<p>	Choose an hour of the day </br>
+			with the slider. </br>
+			</br>
+			The circle bar chart shows the </br>
+			percentage of the available taxis </br>
+			at every hour. </br>
+			</br>
+			The map to the right shows a </br>
+			map of where the cars are at </br>
+			the specified hour.</br>
+	</p>
+-->
+			</div>
+			<div id="rightSide">
 				<div id="map">
 				</div>
 			</div>
-			<input type="range" id="monthSlider" min="1" max="31" step="1" style="width:100%" value="1"></input>
-			<div id="monthSlider2">
+			<div id="bottom">
+				<div id="dateSlider">
+					<p> Select day of March 2013</p>
+					<!--
+					<input type="range" id="monthSlider" min="1" max="31" step="1" style="width:100%" value="1"></input>-->
+					<div id="sliderDiv"></div>
+				</div>
+				<div id="gradient">
+					<p>Low density</p>
+					<img src="img/gradient.png" alt="Description" style="width:200px;height:40px">
+					<p>High density</p>
+				</div>
 			</div>
-
 		</div>
 
 		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+		
 		<script src="js/vendor/bootstrap.min.js"></script>
 		<script src="js/plugins.js"></script>
 		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -83,10 +83,9 @@
 		<script src="js/vendor/topojson.v1.min.js"></script>
 		<script src="js/vendor/underscore-min.js"></script>
 		<script src="js/vendor/colorbrewer.js"></script>
-		<!--<script src="js/vendor/circular-slider/dist/circular-slider.min.js"></script>-->
-		<script type="text/javascript" src="js/vendor/radialBarChart.js"></script>
+		<script src="js/vendor/radialBarChart.js"></script>
 		<script src="js/vendor/circular-slider.js"></script>
-		<script src="js/vendor/d3.slider.js"></script>
+		<script type="text/javascript" src="js/vendor/d3.slider.js"></script>
 		
 		<!-- GOOGLE -->
 		<script type="text/javascript"
@@ -99,8 +98,6 @@
 		<script type="text/javascript" src="js/interaction.js"></script>
 		<script type="text/javascript" src="js/monthSlider.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
-
-		
 
 	</body>
 </html>

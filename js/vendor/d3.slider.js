@@ -3,36 +3,6 @@
     Inspired by jQuery UI Slider
     Copyright (c) 2013, Bjorn Sandvik - http://blog.thematicmapping.org
     BSD license: http://opensource.org/licenses/BSD-3-Clause
-
-    Copyright (c) 2013, Bjorn Sandvik
-
-  All rights reserved.
-
-  Redistribution and use in source and binary forms, with or without modification,
-  are permitted provided that the following conditions are met:
-
-    Redistributions of source code must retain the above copyright notice, this
-    list of conditions and the following disclaimer.
-
-    Redistributions in binary form must reproduce the above copyright notice, this
-    list of conditions and the following disclaimer in the documentation and/or
-    other materials provided with the distribution.
-
-    Neither the name of the {organization} nor the names of its
-    contributors may be used to endorse or promote products derived from
-    this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-  ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -56,16 +26,16 @@ return function module() {
   "use strict";
 
   // Public variables width default settings
-  var min = 1,
-      max = 31,
-      step = 1,
+  var min = 0,
+      max = 100,
+      step = 0.01,
       animate = true,
       orientation = "horizontal",
       axis = false,
       margin = 50,
-      value = 1,
+      value,
       active = 1,
-      snap = true,
+      snap = false,
       scale;
 
   // Private variables
@@ -240,7 +210,6 @@ return function module() {
       }
 
       function onClickHorizontal() {
-
         if (toType(value) != "array") {
           var pos = Math.max(0, Math.min(sliderLength, d3.event.offsetX || d3.event.layerX));
           moveHandle(scale.invert ? 
@@ -358,6 +327,7 @@ return function module() {
         alignValue += (valModStep > 0) ? step : -step;
       }
     };
+
     return alignValue;
 
   }

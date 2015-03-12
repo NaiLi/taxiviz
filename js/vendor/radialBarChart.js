@@ -49,7 +49,7 @@ function radialBarChart() {
   }
 
   // Configurable variables
-  var margin = {top: 40, right: 20, bottom: 20, left: 20};
+  var margin = {top: 30, right: 20, bottom: 20, left: 20};
   var barHeight = 100;
   var reverseLayerOrder = false;
   var barColors = undefined;
@@ -152,7 +152,7 @@ function radialBarChart() {
       .append('textPath')
       .attr('xlink:href', '#label-path')
       // changes where texts is anchored
-      .attr('startOffset', function(d, i) {return i * 100 / numBars + 10 / numBars + '%';})
+      .attr('startOffset', function(d, i) {return i * 100 / numBars + 20 / numBars + '%';})
       .text(function(d) { return hours[d] ;});
   }
 

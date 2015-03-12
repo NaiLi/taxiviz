@@ -14,30 +14,32 @@ function monthSlider() {
 		map.run();
 	}
 
-	var x = d3.scale.linear().domain([1,31]).range([0,300]).clamp(true);
-	var xAxis = d3.svg.axis()
-                  .scale(x)
-                  .orient("top");
+	// Set the slider to pick day of the month
+    d3.select('#sliderDiv')
+    .append("div")
+        .attr("class","slider")
+        .attr("fill", "white")
+    .call(d3.slider()
+        .axis(d3.svg.axis()
+            .tickFormat(function(d) { 
+                return d; 
+              })
+            .ticks(31)
+        	)
+            .min(1)
+            .max(31)
+            .step(1)
+            .value(1)
+        .on("slide", function(evt, value) {
+	 		var num = value;
+ 			value = (value<10) ? "0" + value : value;
+ 			var d = "2013-03-" + value;
 
-	var slide = d3.select("#monthSlider").on("input", function() {
- 		 
- 		var num = this.value;
- 		num = (num<10) ? "0" + num : num;
- 		var d = "2013-03-" + num;
- 		//console.log(new Date(d));
-
- 		setLocalData(data, new Date(d)); 
-	})
-	
-	slide.append("g")
-	.call(xAxis)
-	.select(".domain");
+ 			setLocalData(data, new Date(d)); 
+        })
+    )
 
 	this.setGlobalDataGlobal = function(_data, date) {
 		setLocalData(_data, date);
 	}
-/*
-	var slide2 = d3.select("#monthSlider2").call(d3.slider()).on("input", function() {
-		console.log("hej")
-	});*/
 }

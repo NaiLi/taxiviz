@@ -43,8 +43,12 @@ function circleChart(){
 		// Creating circle chart of free cars
 		var chartDataFree = createChartData(data, "free");
 
+		var h = document.getElementById('dayChart').clientHeight;
+		//console.log("h",h);
+
 		chart = radialBarChart()
-		.barHeight(100)
+		.margin({top: h/10, right: 50, bottom: 50, left: 50})
+		.barHeight(h/2.5)
 		.reverseLayerOrder(false)
 		.capitalizeLabels(true)
 		.barColors(createColors())
