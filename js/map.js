@@ -13,7 +13,7 @@ function map() {
 		// Creates the map
 		initializeMap();
 
-		//Draw day one (1 of March, 08:00)
+		//Draw first hour of the day
 		draw(localData[8]);
 	}
 
