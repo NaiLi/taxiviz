@@ -41,14 +41,23 @@ h2 {
 	padding-bottom: 0px;
 	margin-bottom: 0px;
 }
+h3 {
+	text-align: center;
+	font-size: 2vh;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
 p {
 	font-size: 3vh;
 	text-align: center;
 }
-
+#test {
+	width: 69%;
+	height: 3vh;
+}
 #dayChart {
 	width: 69%;
-	height: 60vh;
+	height: 50vh;
 	margin: 0 auto;
 	position: relative;
 	text-align: center;
@@ -56,13 +65,16 @@ p {
 }
 #interaction {
 	width: 29%;
-	height: 60vh;
+	height: 50vh;
 	float: left;
 	overflow: hidden;
 }
 
-#interaction p, #interaction input{
+#interaction input{
 	margin: 5vh 5vh;
+}
+#interaction p {
+	font-size: 1.7vh;
 }
 #interaction input {
 	padding: 10px 30px;
@@ -78,7 +90,6 @@ p {
 	background: #bAaEcC;
 	color: white;
 }
-
 #map {
 	width: 100%;
 	height: 80vh;
@@ -87,8 +98,9 @@ p {
 
 #dateSlider {
 	float:left;
-	height: 15vh;
+	height: 10vh;
 	width: 60%;
+	margin: 0 2vh;
 }
 #gradient {
 	float:right;
