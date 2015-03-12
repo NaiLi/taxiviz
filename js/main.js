@@ -1,5 +1,6 @@
 var slider;
 var data;
+var dayData; 
 
 var file = "data/reducedTable_sortedbyDateTime.csv";
 var localData = [];
@@ -26,5 +27,5 @@ d3.csv(file, function(data) {
 
 	interaction = new interaction();
 	map.run();
-	circleChart.run(data);
+	circleChart.run(dayData);
 });

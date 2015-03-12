@@ -5,13 +5,14 @@ function monthSlider() {
 		//clean local data
 		localData = [];
 
-		var day = map.getOneDay(_data, date);
+		dayData = map.getOneDay(_data, date);
 
 		for(var i=0; i<24; i++) {
-			var temp  = map.getHourOf(day, i);
+			var temp  = map.getHourOf(dayData, i);
 			localData.push(temp);
 		};
 		map.run();
+        circleChart.run(dayData);
 	}
 
 	// Set the slider to pick day of the month
