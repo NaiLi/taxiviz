@@ -231,7 +231,7 @@ function radialBarChart() {
           //console.log("chosen: " + chosen);
           if(i == chosen) {
           	//chosen = chosen+1;
-            return "blue";
+            return "white";
           }
           return barColors[i % barColors.length];
         };

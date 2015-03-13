@@ -29,27 +29,42 @@
 						Visualization of taxis in Stockholm 
 					</h2>
 				</div>
-				<div id="test">
-					<h3> Select hour of day </h3>
+				<div id="dayLabel">
+					<h3> 
+						Select hour of day 
+						<i class="fa fa-arrow-down"></i>
+				</h3>
+
+				</div>
+				<div id="text">
+						
+						<p>	The circle bar chart shows the </br>
+								percentage of the available taxis 
+								at every hour. </br>
+								</br>
+								The map to the right shows where the cars are at </br>
+								the specified hour.</br>
+								</br>
+								Choose a day in March 2013 with the slider below </br>
+								</br>
+								Choose an hour of the day </br>
+								with the slider to the right. </br>
+								</br>
+								Or press the Timelaps button </br> 
+								to circle trough all hours </br>
+								of the chosen day
+
+						</p>
+
+						
 				</div>
 				<div id="dayChart">
 					<div id="circleChart1">				
 						<div id="slider"></div>
 					</div>
 				</div>
-				<div id="interaction">
-						<input type="button" value="Timelapse" onclick="map.tickMap();"/>
-						<p>	Choose an hour of the day </br>
-								with the slider. </br>
-								</br>
-								The circle bar chart shows the </br>
-								percentage of the available taxis </br>
-								at every hour. </br>
-								</br>
-								The map to the right shows a </br>
-								map of where the cars are at </br>
-								the specified hour.</br>
-						</p>
+				<div id="lapse">
+					<input id="input" type="button" value="Timelapse" onclick="map.tickMap();"/>
 				</div>
 			</div>
 			<div id="rightSide">
@@ -58,7 +73,8 @@
 			</div>
 			<div id="bottom">
 				<div id="dateSlider">
-					<h3> Select day of March 2013</h3>
+					<h3> 
+						Select day of March 2013</h3>
 					<div id="sliderDiv"></div>
 				</div>
 				<div id="gradient">
